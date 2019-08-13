@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
+</head>
+<body style="background-image: url('/public/img/backgrounds/user_settings.jpg');">
+<div th:insert="parts/navbar.html :: bar"></div>
+<div th:if="${param.updated}" class="alert alert-success" role="alert">
+    Data is updated
+</div>
+<div th:if="${param.updated_pass}" class="alert alert-success" role="alert">
+    Password is updated
+</div>
+<div style="margin-left: 10vw; margin-right: 10vw; height: 80vh; margin-top: 2vh; background-color: rgba(255,255,255,0.99);">
+    <form name="fields" class="needs-validation" th:object="${userData}" method="post"
+          action="/user/settings" enctype="utf8" style="width: 50%; padding-left: 5vw; padding-top: 1vh;">
+        <div class="form-group">
+            <label for="loginField">Login:</label>
+            <div class="form-control" id="loginField" sec:authentication="name" style="display: inline;"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="nameField">Name:</label>
+            <input class="form-control" id="nameField" name="name" type="text" th:value="*{name}"/>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <div class="form-group">
+            <label for="surnameField">Surname:</label>
+            <input class="form-control" id="surnameField" name="surname" type="text" th:value="*{surname}"/>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('surname')}"
+                 th:errors="*{surname}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="birthField">Birth date:</label>
+            <p class="form-control" id="birthField" th:text="${#temporals.format(userData.birthDate,'dd.MM.yyyy')}"
+               style="display: inline;"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Update data</button>
+    </form>
+
+    <div class="dropdown-divider"></div>
+
+    <form name="pass" class="needs-validation" th:object="${userPassword}" method="post"
+          action="/user/settings/sensitive" enctype="utf8" style="width: 50%; padding-left: 5vw; padding-top: 1vh;">
+        <div th:if="${#fields.hasGlobalErrors()}" style="color: red;">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
+
+        <div class="form-group">
+            <label for="oldPasswordField">Current password:</label>
+            <input type="password" class="form-control" id="oldPasswordField" name="currentPassword"
+                   th:value="*{currentPassword}"
+                   style="display: inline;"/>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('currentPassword')}"
+                 th:errors="*{currentPassword}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="newPasswordField">New password:</label>
+            <input type="password" class="form-control" id="newPasswordField" name="newPassword"
+                   th:value="*{newPassword}"
+                   style="display: inline;"/>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('newPassword')}"
+                 th:errors="*{newPassword}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="repeatedNewPasswordField">Repeat new password:</label>
+            <input type="password" class="form-control" id="repeatedNewPasswordField" name="repeatedNewPassword"
+                   th:value="*{repeatedNewPassword}" style="display: inline;"/>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('repeatedNewPassword')}"
+                 th:errors="*{repeatedNewPassword}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update password</button>
+    </form>
+</div>
+</body>
+</html>

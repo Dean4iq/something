@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{sign_up.title}">Sign up</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
+    <script src="cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        .note {
+                text-align: center;
+                height: 80px;
+                background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+                color: #fff;
+                font-weight: bold;
+                line-height: 80px;
+        }
+        .form-content {
+                padding: 5%;
+                border: 1px solid #ced4da;
+                margin-bottom: 2%;
+        }
+        .form-control {
+                border-radius:1.5rem;
+        }
+        .btnSubmit {
+                border:none;
+                border-radius:1.5rem;
+                padding: 1%;
+                width: 20%;
+                cursor: pointer;
+                background: #0062cc;
+                color: #fff;
+        }
+        span.error {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<form action='/sign_up' th:object="${userData}" method="POST">
+    <div class="container register-form">
+        <div class="form">
+            <div class="note">
+                <p th:text="#{sign_up.form.header}">Sign up</p>
+            </div>
+
+            <div class="form-content">
+                <div th:if="${#fields.hasGlobalErrors()}" style="color: red;">
+                    <div class="alert alert-danger" role="alert" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:placeholder="#{sign_up.form.placeholder.login}"
+                                   th:field="*{login}" required/>
+                            <span class="error" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="date" class="form-control"
+                                   th:placeholder="#{sign_up.form.placeholder.birth_date}"
+                                   aria-describedby="birthDayHelp" name="birthDate" th:field="*{birthDate}" required/>
+                            <small id="birthDayHelp" class="form-text text-muted"
+                                   th:text="#{sign_up.form.warn.birth_date}">Day of birth cannot be changed after
+                                registration.</small>
+                            <span class="error" th:if="${#fields.hasErrors('birthDate')}"
+                                  th:errors="*{birthDate}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   th:placeholder="#{sign_up.form.placeholder.password}" th:field="*{password}"
+                                   required/>
+                            <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   th:placeholder="#{sign_up.form.placeholder.confirm_password}"
+                                   th:field="*{repeatedPassword}" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:placeholder="#{sign_up.form.placeholder.name}"
+                                   th:field="*{name}" required/>
+                            <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:placeholder="#{sign_up.form.placeholder.surname}"
+                                   name="surname" th:field="*{surname}" required/>
+                            <span class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+                        </div>
+                    </div>
+                    <input type="checkbox" id="agreementAcceptance" style="margin-left: 10px; margin-right: 10px;"
+                           th:field="*{rulesAccepted}" required/>
+                    <label for="agreementAcceptance">
+                        <span th:text="#{sign_up.form.rules}"></span>
+                        <a href="#" th:text="#{sign_up.form.agreements.terms_of_use}"></a>
+                        <span th:text="#{sign_up.form.agreements.and}"></span>
+                        <a href="#" th:text="#{sign_up.form.agreements.privacy_policy}"></a>
+                    </label>
+                    <span class="error" th:if="${#fields.hasErrors('rulesAccepted')}"
+                          th:errors="*{rulesAccepted}"></span>
+                </div>
+                <button type="submit" class="btnSubmit" th:text="#{sign_up.form.submit}">Submit</button>
+            </div>
+            <a href="/login" th:text="#{sign_up.link.sign_in}">Already registered?</a>
+        </div>
+    </div>
+</form>
+</body>
+</html>
