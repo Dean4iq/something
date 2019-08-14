@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target( { ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DoesCurrentPasswordMatches {
-    String message() default "Current password is invalid";
+    String message() default "${password.current.not_match}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

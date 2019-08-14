@@ -8,10 +8,10 @@ import java.util.Objects;
 public class UserDataDto implements Serializable {
     private static final long serialVersionUID = 8927345630325470L;
 
-    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "Name is incorrect")
+    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "${pattern.name}")
     private String name;
 
-    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "Surname is incorrect")
+    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "${pattern.surname}")
     private String surname;
 
     private LocalDate birthDate;

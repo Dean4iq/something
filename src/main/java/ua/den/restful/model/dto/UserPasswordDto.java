@@ -10,17 +10,17 @@ import java.util.Objects;
 
 @DoesCurrentPasswordMatches
 @FieldsMatches(fieldName = "newPassword", repeatedFieldName = "repeatedNewPassword", invokedClass = UserPasswordDto.class,
-        message = "Password don't match")
+        message = "{password.repeated.mismatched}")
 public class UserPasswordDto implements Serializable {
     private static final long serialVersionUID = 892734897325470L;
 
-    @NotBlank
+    @NotBlank(message = "{field.blank}")
     private String currentPassword;
 
-    @Size(min = 5, max = 28, message = "Password should contain from 5 to 28 characters")
+    @Size(min = 5, max = 28, message = "{password.new.pattern}")
     private String newPassword;
 
-    @NotBlank
+    @NotBlank(message = "{field.blank}")
     private String repeatedNewPassword;
 
     public String getCurrentPassword() {

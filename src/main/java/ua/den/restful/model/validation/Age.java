@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Age {
-    String message() default "Age should be acceptable";
+    String message() default "${age.unacceptable}";
     int minAge() default 0;
     int maxAge() default 150;
     Class<?>[] groups() default {};

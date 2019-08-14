@@ -14,31 +14,31 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @FieldsMatches(fieldName = "password", repeatedFieldName = "repeatedPassword",
-        invokedClass = UserRegistrationDTO.class, message = "Password don't match")
+        invokedClass = UserRegistrationDTO.class, message = "{password.repeated.mismatched}")
 public class UserRegistrationDTO implements Serializable {
     private static final long serialVersionUID = 89273489732940L;
 
-    @Pattern(regexp = "^[A-z0-9._]{6,18}$", message = "Login is incorrect")
+    @Pattern(regexp = "^[A-z0-9._]{6,18}$", message = "{login.new.pattern}")
     @UniqueLogin
     private String login;
 
-    @Size(min = 5, max = 28, message = "Password should contain at least 5 character to 28 characters")
+    @Size(min = 5, max = 28, message = "{password.new.pattern}")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "{field.blank}")
     private String repeatedPassword;
 
-    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "Name is incorrect")
+    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "{pattern.name}")
     private String name;
 
-    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "Surname is incorrect")
+    @Pattern(regexp = "^[A-Z]{1}[a-z]{1,44}$", message = "{pattern.surname}")
     private String surname;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Age(minAge = 14, maxAge = 75)
     private LocalDate birthDate;
 
-    @AssertTrue(message = "You should accept the agreement!")
+    @AssertTrue(message = "{agreement.not_accepted}")
     private boolean rulesAccepted;
 
     public String getLogin() {
