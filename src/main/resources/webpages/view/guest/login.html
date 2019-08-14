@@ -36,7 +36,7 @@
 
 <div th:if="${param.logout}" class="alert alert-success" role="alert" th:text="#{login.from_logout}"></div>
 
-<form action="/j_spring_process_login" name="f" method="post" class="centring">
+<form action="/j_spring_process_login" name="f" method="post" class="centring" style="z-index: -1;">
     <div class="centring">
         <div class="form-group">
             <h4><label for="loginField" th:text="#{login.field.login}"></label></h4>
@@ -57,7 +57,7 @@
             yet?</a>
     </div>
 </form>
-<form method="get" style="margin-top: 10px; text-align: center; z-index: -1;">
+<form method="get" style="margin-top: 10px; text-align: center;">
     <button type="submit" name="lang" value="en" style="border: 0; padding: 0; height: 0;"><img src="/public/img/ico/en.ico" style="height: 50px;" alt="EN"/></button>
     <button type="submit" name="lang" value="uk" style="border: 0; padding: 0; height: 0;"><img src="/public/img/ico/ua.png" style="height: 50px;" alt="UA"/></button>
 </form>
