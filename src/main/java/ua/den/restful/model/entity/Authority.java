@@ -7,14 +7,15 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "authority", schema = "edu")
 public class Authority implements Serializable {
-    @Id()
+    @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "role",nullable = false)
     private AuthorityType role;
 
     public Integer getId() {

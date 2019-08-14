@@ -6,28 +6,28 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "user", schema = "edu")
 public class User implements Serializable {
     private static final long serialVersionUID = 45721234567844554L;
 
     @Column
     @Id
     private String login;
-    @Column
+    @Column(nullable = false)
     private String password;
-    @Column
+    @Column(nullable = false)
     private String name;
-    @Column
+    @Column(nullable = false)
     private String surname;
-    @Column(name = "register_date")
+    @Column(name = "register_date", nullable = false)
     private Timestamp registerDate;
-    @Column
+    @Column(nullable = false)
     private boolean enabled;
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", nullable = false)
     private Timestamp birthDate;
 
     @ManyToOne
-    @JoinColumn(name = "authority")
+    @JoinColumn(name = "authority", nullable = false)
     private Authority authority;
 
     public User() {
