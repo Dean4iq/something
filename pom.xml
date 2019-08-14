@@ -7,7 +7,7 @@
     <groupId>ua.den</groupId>
     <artifactId>something</artifactId>
     <version>0.1</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>Something Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
@@ -22,6 +22,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
