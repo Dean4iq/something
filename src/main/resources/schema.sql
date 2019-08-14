@@ -1,6 +1,8 @@
+CREATE SEQUENCE IF NOT EXISTS authority_id_seq;
+
 CREATE TABLE IF NOT EXISTS public.authority
 (
-    id integer NOT NULL DEFAULT nextval('authority_id_seq'::regclass),
+    id integer NOT NULL DEFAULT nextval('authority_id_seq'),
     role character varying(255) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT authority_pkey PRIMARY KEY (id)
 )
@@ -8,6 +10,9 @@ WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
+
+ALTER SEQUENCE authority_id_seq
+OWNED BY public.authority.id;
 
 CREATE TABLE IF NOT EXISTS public."user"
 (
