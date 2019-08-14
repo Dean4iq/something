@@ -37,8 +37,8 @@
                         <span sec:authentication="name" style="color: #FFF;">Unknown</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a th:href="@{/user/settings}" class="dropdown-item"><span th:text="#{nav.settings}"></span></a>
-                        <div class="dropdown-divider"></div>
+                        <a th:href="@{/user/settings}" sec:authorize="hasAuthority('ROLE_ADMIN')" class="dropdown-item"><span th:text="#{nav.settings}"></span></a>
+                        <div class="dropdown-divider" sec:authorize="hasAuthority('ROLE_ADMIN')"></div>
                         <a th:href="@{/logout}" class="dropdown-item"><span th:text="#{nav.logout}"></span></a>
                     </div>
                 </li>
