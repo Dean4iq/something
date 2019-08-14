@@ -9,12 +9,16 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = AgeValidator.class)
-@Target( { ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Age {
     String message() default "{age.unacceptable}";
+
     int minAge() default 0;
+
     int maxAge() default 150;
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

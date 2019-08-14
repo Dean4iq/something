@@ -8,10 +8,12 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = UniqueLoginValidator.class)
-@Target( { ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueLogin {
     String message() default "{login.new.not_unique}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

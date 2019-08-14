@@ -25,7 +25,7 @@ public class GuestController {
 
     @GetMapping("/login")
     public String getLoginPage() {
-            return "guest/login";
+        return "guest/login";
     }
 
     @GetMapping("sign_up")

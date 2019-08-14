@@ -8,10 +8,12 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = CurrentPasswordValidator.class)
-@Target( { ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DoesCurrentPasswordMatches {
     String message() default "${password.current.not_match}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

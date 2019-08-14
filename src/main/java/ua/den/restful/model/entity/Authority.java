@@ -15,7 +15,7 @@ public class Authority implements Serializable {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role",nullable = false)
+    @Column(name = "role", nullable = false)
     private AuthorityType role;
 
     public Integer getId() {

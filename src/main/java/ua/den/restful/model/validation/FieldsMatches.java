@@ -10,13 +10,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Constraint(validatedBy = PasswordMatchesValidator.class)
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldsMatches {
     String message();
+
     String fieldName();
+
     String repeatedFieldName();
+
     Class invokedClass();
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
