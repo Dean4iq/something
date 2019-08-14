@@ -36,6 +36,10 @@
 
 <div th:if="${param.logout}" class="alert alert-success" role="alert" th:text="#{login.from_logout}"></div>
 
+<form method="get" class="centring">
+    <button type="submit" name="lang" value="en" style="border: 0; padding: 0; height: 0;"><img src="/public/img/ico/en.ico" style="height: 50px;" alt="EN"/></button>
+    <button type="submit" name="lang" value="uk" style="border: 0; padding: 0; height: 0;"><img src="/public/img/ico/ua.png" style="height: 50px;" alt="UA"/></button>
+</form>
 <form action="/j_spring_process_login" name="f" method="post" class="centring">
     <div class="centring">
         <div class="form-group">

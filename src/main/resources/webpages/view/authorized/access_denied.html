@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>403 - Access denied</title>
+    <title th:text="#{error.403.title}">403 - Access denied</title>
 </head>
 <body>
-<h1 align="center" style="color: red;">Access denied</h1>
-<h2 align="center">You tried to access secured page without authorization</h2>
+<h1 align="center" style="color: red;" th:text="#{error.403.message.head}">Access denied</h1>
+<h2 align="center" th:text="#{error.403.message.body}">You tried to access secured page without authorization</h2>
 </body>
 </html>
