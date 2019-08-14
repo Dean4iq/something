@@ -1,3 +1,3 @@
 INSERT INTO public.authority (id, role) VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_USER');
-INSERT INTO public.user (login, password, name, surname, register_date, enabled, birth_date, authority) VALUES ('admin', '$2y$11$H6GGoM3vcCg9aTiXwJGdEOrEXyvkEL4rG7i37rOXALfZV5lSqs4KG', 'ADMIN', 'ADMIN', '2000-01-01 00:00:00', true, '2000-01-01 00:00:00', 1);
-INSERT INTO public.user (login, password, name, surname, register_date, enabled, birth_date, authority) VALUES ('user1234', '$2y$11$T/Ch/47gLMGKPBTsCy7/fO0dNUBU8Wrda5E13uTu/6N87RaAvQEna', 'Den', 'Onyshchenko', '2019-08-01 10:10:10', true, '1996-08-31 00:00:00', 1);
+INSERT INTO public.user (login, password, name, surname, register_date, enabled, birth_date, authority) VALUES ('admin', '$2a$11$AgerhbzpMMGaOPrWmww6XeN16y372o153J0md9AZgrXSy5rYgBnTi', 'ADMIN', 'ADMIN', '2000-01-01 00:00:00', true, '2000-01-01 00:00:00', 1);
+INSERT INTO public.user (login, password, name, surname, register_date, enabled, birth_date, authority) VALUES ('user1234', '$2a$11$3nSgv7mAkd4lcRgnvCRRLuWTAYbznQpIMwSVf9lKuhDnn6sgH5qgC', 'Den', 'Onyshchenko', '2019-08-01 10:10:10', true, '1996-08-31 00:00:00', 1);
