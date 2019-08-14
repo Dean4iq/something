@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS public.authority
 (
     id integer NOT NULL DEFAULT nextval('authority_id_seq'),
     role character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT authority_pkey PRIMARY KEY (id)
+    PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS public."user"
     register_date timestamp without time zone NOT NULL,
     surname character varying(255) COLLATE pg_catalog."default" NOT NULL,
     authority integer NOT NULL,
-    CONSTRAINT user_pkey PRIMARY KEY (login),
+    PRIMARY KEY (login),
     CONSTRAINT fk_user_authority_id FOREIGN KEY (authority)
         REFERENCES public.authority (id) MATCH SIMPLE
         ON UPDATE NO ACTION
