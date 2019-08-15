@@ -40,8 +40,7 @@
         </td>
         <td>
             <form th:action="@{'/admin/users/{login}'(login=${user.login})}" method="get">
-                <span th:text="${user.authority.role}"></span>
-                <button  type="submit" class="btn btn-secondary" th:text="#{admin.users.form.details}">Details</button>
+                <button th:if="${user.authority.role == 'ROLE_USER'}" type="submit" class="btn btn-secondary" th:text="#{admin.users.form.details}">Details</button>
             </form>
         </td>
     </tr>
