@@ -28,7 +28,7 @@ public class GuestController {
         if (principal.getName() != null) {
             return "redirect:/home";
         }
-        
+
         return "guest/login";
     }
 
