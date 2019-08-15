@@ -39,14 +39,14 @@
         <div th:switch="${userData.enabled}" style="display: inline;">
             <div th:case="true" style="display: inherit; float: right;">
                 <span th:text="#{admin.users.form.user.enabled}" style="display: inherit;">Enabled</span>
-                <form method="post" th:action="disable" style="display: inherit;">
+                <form method="post" action="disable" style="display: inherit;">
                     <button type="submit" class="btn btn-secondary" th:text="#{admin.user.form.disable}">Disable
                     </button>
                 </form>
             </div>
             <div th:case="false">
                 <span th:text="#{admin.users.form.user.disabled}">Disabled</span>
-                <form method="post" th:action="enable">
+                <form method="post" action="enable">
                     <button type="submit" class="btn btn-primary" th:text="#{admin.user.form.enable}">Enable</button>
                 </form>
             </div>
