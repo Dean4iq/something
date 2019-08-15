@@ -28,7 +28,7 @@
     </li>
     <li class="list-group-item">
         <span th:text="#{admin.user.form.birth_date}"></span>
-        <span th:text="${#dates.format(userData.birthDate, 'dd-MM-yyyy HH:mm')}" style="float: right;"></span>
+        <span th:text="${#dates.format(userData.birthDate, 'dd-MM-yyyy')}" style="float: right;"></span>
     </li>
     <li class="list-group-item">
         <span th:text="#{admin.user.form.registration_date}"></span>
