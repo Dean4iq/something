@@ -46,7 +46,7 @@
             </div>
             <div th:case="false">
                 <span th:text="#{admin.users.form.user.disabled}">Disabled</span>
-                <form method="post" th:action="@{'/admin/users/{login}/enable'(login=${userData.login})}}">
+                <form method="post" th:action="@{'/admin/users/{login}/enable'(login=${userData.login})}">
                     <button type="submit" class="btn btn-primary" th:text="#{admin.user.form.enable}">Enable</button>
                 </form>
             </div>
