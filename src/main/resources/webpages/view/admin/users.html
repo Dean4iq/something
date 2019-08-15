@@ -31,6 +31,7 @@
                 <span th:case="true" th:text="#{admin.users.form.user.enabled}">Enabled</span>
                 <span th:case="false" th:text="#{admin.users.form.user.disabled}">Disabled</span>
             </div>
+            <input type="checkbox" th:value="${user.enabled}" checked data-toggle="toggle"/>
         </td>
         <td>
             <form th:action="@{'/admin/users/{login}'(login=${user.login})}" method="get">
