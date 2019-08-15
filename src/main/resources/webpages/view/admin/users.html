@@ -13,7 +13,7 @@
 </head>
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
-<table class="table table-striped">
+<table class="table table-striped" style="padding-top: 2vh;">
     <thead class="thead-dark">
     <tr>
         <th scope="col" th:text="#{admin.users.form.login}">Login</th>
@@ -37,7 +37,7 @@
                 <span th:case="false" th:text="#{admin.users.form.user.disabled}">Disabled</span>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" th:value="${user.enabled}" class="custom-control-input"/>
+                <input type="checkbox" class="custom-control-input"/>
             </div>
         </td>
         <td>
