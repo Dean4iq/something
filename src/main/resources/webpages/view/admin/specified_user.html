@@ -13,33 +13,33 @@
 </head>
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
-<ul class="list-group">
+<ul class="list-group" style="width: 50vw;">
     <li class="list-group-item">
         <span th:text="#{admin.user.form.login}"></span>
-        <span th:text="${userData.login}" style="text-align: right;"></span>
+        <span th:text="${userData.login}" style="float: right;"></span>
     </li>
     <li class="list-group-item">
         <span th:text="#{admin.user.form.name}"></span>
-        <span th:text="${userData.name}" style="text-align: right;"></span>
+        <span th:text="${userData.name}" style="float: right;"></span>
     </li>
     <li class="list-group-item">
         <span th:text="#{admin.user.form.surname}"></span>
-        <span th:text="${userData.surname}" style="text-align: right;"></span>
+        <span th:text="${userData.surname}" style="float: right;"></span>
     </li>
     <li class="list-group-item">
         <span th:text="#{admin.user.form.birth_date}"></span>
-        <span th:text="${userData.birthDate}" style="text-align: right;"></span>
+        <span th:text="${userData.birthDate}" style="float: right;"></span>
     </li>
     <li class="list-group-item">
         <span th:text="#{admin.user.form.registration_date}"></span>
-        <span th:text="${userData.registerDate}" style="text-align: right;"></span>
+        <span th:text="${userData.registerDate}" style="float: right;"></span>
     </li>
     <li class="list-group-item">
-        <span th:text="#{admin.user.form.enabled}"></span>
-        <div th:switch="${userData.enabled}">
-            <div th:case="true">
-                <span th:text="#{admin.users.form.user.enabled}">Enabled</span>
-                <form method="post" th:action="@{disable}">
+        <span th:text="#{admin.user.form.enabled}" style="display: inline;"></span>
+        <div th:switch="${userData.enabled}" style="display: inline;">
+            <div th:case="true" style="display: inherit;">
+                <span th:text="#{admin.users.form.user.enabled}" style="display: inherit;">Enabled</span>
+                <form method="post" th:action="@{disable}" style="display: inherit;">
                     <button type="submit" class="btn btn-secondary" th:value="#{admin.user.form.disable}">Disable
                     </button>
                 </form>
