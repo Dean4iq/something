@@ -92,6 +92,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/users?acc_deleted=true");
 
         userService.deleteUser(user);
+        modelAndView.addObject("userAccount", user.getLogin());
 
         return modelAndView;
     }

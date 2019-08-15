@@ -13,6 +13,10 @@
 </head>
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
+
+<div th:if="${param.updated}" class="alert alert-success" role="alert" th:text="#{admin.user.alert.updated}"></div>
+<div th:if="${param.unacceptable}" class="alert alert-danger" role="alert" th:text="#{admin.user.alert.unacceptable}"></div>
+
 <ul class="list-group" style="width: 50vw;">
     <li class="list-group-item">
         <span th:text="#{admin.user.form.login}"></span>
