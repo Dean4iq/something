@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{admin.users.title}">Users data</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <table class="table">
@@ -31,7 +33,7 @@
             </div>
         </td>
         <td>
-            <form th:action="@{/users/${user.login}}" method="get">
+            <form th:action="@{'/admin/users/{login}'(login=${user.login})}" method="get">
                 <button type="submit" class="btn btn-secondary" th:text="#{admin.users.form.details}">Details</button>
             </form>
         </td>
