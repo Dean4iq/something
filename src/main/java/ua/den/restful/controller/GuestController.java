@@ -9,7 +9,6 @@ import ua.den.restful.model.dto.UserRegistrationDTO;
 import ua.den.restful.model.service.UserService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("")
@@ -24,11 +23,7 @@ public class GuestController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage(Principal principal) {
-        if (principal.getName() != null) {
-            return "redirect:/home";
-        }
-
+    public String getLoginPage() {
         return "guest/login";
     }
 

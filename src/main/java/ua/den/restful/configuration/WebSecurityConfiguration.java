@@ -53,6 +53,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("j_password")
                 .successForwardUrl("/login_success")
                 .failureUrl("/login?error=true")
+                .permitAll()
                 .and()
                 .rememberMe()
                 .rememberMeParameter("remember-me")
