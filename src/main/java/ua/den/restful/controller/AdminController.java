@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.den.restful.model.entity.User;
+import ua.den.restful.model.enums.AuthorityType;
 import ua.den.restful.model.service.UserService;
 
 import java.util.List;
@@ -40,22 +41,30 @@ public class AdminController {
 
     @PostMapping("users/{login}/disable")
     public ModelAndView disableUserAccount(@PathVariable("login") final User user) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
+        if (user.getAuthority().getRole().equals(AuthorityType.ROLE_USER)) {
+            ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
 
-        user.setEnabled(false);
-        userService.updateUserData(user);
+            user.setEnabled(false);
+            userService.updateUserData(user);
 
-        return modelAndView;
+            return modelAndView;
+        } else {
+            return new ModelAndView("redirect:/admin/" + user.getLogin() + "?unaccepted=true");
+        }
     }
 
     @PostMapping("users/{login}/enable")
     public ModelAndView enableUserAccount(@PathVariable("login") final User user) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
+        if (user.getAuthority().getRole().equals(AuthorityType.ROLE_USER)) {
+            ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
 
-        user.setEnabled(true);
-        userService.updateUserData(user);
+            user.setEnabled(true);
+            userService.updateUserData(user);
 
-        return modelAndView;
+            return modelAndView;
+        } else {
+            return new ModelAndView("redirect:/admin/" + user.getLogin() + "?unaccepted=true");
+        }
     }
 
     @PutMapping("users")
