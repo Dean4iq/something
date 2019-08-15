@@ -33,6 +33,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().mvcMatchers("/public/**");
+        web.ignoring().mvcMatchers("/static/**");
     }
 
     @Override
@@ -44,7 +45,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin*/**").hasRole("ADMIN")
                 .antMatchers("/login*", "/sign_up*").anonymous()
                 .antMatchers("/accessDenied").permitAll()
-                .antMatchers("/resources**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
