@@ -57,6 +57,12 @@ public class UserService {
         userRepository.deleteAll();
     }
 
+    public void deleteAllUsersButAdmin() {
+        Integer roleId = authorityService.getAuthorityByRole(AuthorityType.ROLE_USER).getId();
+
+        userRepository.deleteByAuthority(roleId);
+    }
+
     private User convertUserDtoToUser(UserRegistrationDTO userDto) {
         User user = new User.Builder()
                 .login(userDto.getLogin())

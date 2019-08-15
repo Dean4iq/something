@@ -5,4 +5,5 @@ import ua.den.restful.model.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
     User getUserByLogin(String login);
+    void deleteByAuthority(Integer authority);
 }

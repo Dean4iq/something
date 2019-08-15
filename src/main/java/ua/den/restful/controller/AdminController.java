@@ -78,16 +78,16 @@ public class AdminController {
         return modelAndView;
     }
 
-    @DeleteMapping("users")
+    @PostMapping("users/delete")
     public ModelAndView deleteAllUsers() {
         ModelAndView modelAndView = new ModelAndView("admin/users?all_deleted=true");
 
-        userService.deleteAllUsers();
+        userService.deleteAllUsersButAdmin();
 
         return modelAndView;
     }
 
-    @DeleteMapping("users/{login}")
+    @PostMapping("users/{login}/delete")
     public ModelAndView deleteUserAccount(@PathVariable("login") final User user) {
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/users?acc_deleted=true");
 
