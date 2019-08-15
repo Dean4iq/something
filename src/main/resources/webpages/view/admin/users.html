@@ -15,7 +15,7 @@
 <div th:insert="parts/navbar.html :: bar"></div>
 
 <div th:if="${param.all_deleted}" class="alert alert-success" role="alert" th:text="#{admin.users.alert.all_deleted}"></div>
-<div th:if="${param.acc_deleted}" class="alert alert-success" role="alert" th:text="#{admin.users.alert.acc_deleted(${userAccount})}"></div>
+<div th:if="${param.acc_deleted}" class="alert alert-success" role="alert" th:text="#{admin.users.alert.acc_deleted(${param.userAccount})}"></div>
 
 <table class="table table-striped" style="margin-top: 5vh;">
     <caption style="caption-side: top; text-align: center;" th:text="#{admin.users.table.caption}"></caption>
