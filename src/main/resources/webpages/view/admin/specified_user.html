@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{admin.user.title(\'${userData.login}\')}"></title>
+    <title th:text="#{admin.user.title(${userData.login})}"></title>
 
     <link rel="shortcut icon" th:href="@{/public/img/ico/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
