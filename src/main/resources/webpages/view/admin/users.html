@@ -13,7 +13,8 @@
 </head>
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
-<table class="table table-striped" style="padding-top: 2vh;">
+<table class="table table-striped" style="margin-top: 5vh;">
+    <caption align="top" th:text="#{admin.users.table.caption}"></caption>
     <thead class="thead-dark">
     <tr>
         <th scope="col" th:text="#{admin.users.form.login}">Login</th>
