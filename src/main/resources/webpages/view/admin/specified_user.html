@@ -37,24 +37,25 @@
     <li class="list-group-item">
         <span th:text="#{admin.user.form.enabled}"></span>
         <div th:switch="${userData.enabled}">
-            <p th:case="true">
+            <div th:case="true">
                 <span th:text="#{admin.users.form.user.enabled}">Enabled</span>
-            <form method="post" th:action="@{disable}">
-                <button type="submit" class="btn btn-secondary" th:value="#{admin.user.form.disable}">Disable</button>
-            </form>
-            </p>
-            <p th:case="false">
+                <form method="post" th:action="@{disable}">
+                    <button type="submit" class="btn btn-secondary" th:value="#{admin.user.form.disable}">Disable
+                    </button>
+                </form>
+            </div>
+            <div th:case="false">
                 <span th:text="#{admin.users.form.user.disabled}">Disabled</span>
-            <form method="post" th:action="@{enable}">
-                <button type="submit" class="btn btn-primary" th:value="#{admin.user.form.enable}">Enable</button>
-            </form>
-            </p>
+                <form method="post" th:action="@{enable}">
+                    <button type="submit" class="btn btn-primary" th:value="#{admin.user.form.enable}">Enable</button>
+                </form>
+            </div>
         </div>
     </li>
 </ul>
 
 <form th:method="delete">
-    <input type="hidden" name="_method" value="delete" />
+    <input type="hidden" name="_method" value="delete"/>
     <button type="submit" class="btn btn-danger" th:value="#{admin.user.form.delete}">Delete</button>
 </form>
 </body>
