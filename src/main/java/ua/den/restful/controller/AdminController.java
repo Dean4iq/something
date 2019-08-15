@@ -30,7 +30,7 @@ public class AdminController {
     }
 
     @GetMapping("users/{login}")
-    public ModelAndView getUser(@RequestParam("login") final User user) {
+    public ModelAndView getUser(@PathVariable("login") final User user) {
         ModelAndView modelAndView = new ModelAndView("admin/specified_user");
 
         modelAndView.addObject("userData", user);
