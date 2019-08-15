@@ -25,7 +25,7 @@
         <th scope="row" th:text="${user.login}"></th>
         <td th:text="${user.name}"></td>
         <td th:text="${user.surname}"></td>
-        <td th:text="${user.registerDate}"></td>
+        <td th:text="${#dates.format(user.registerDate, 'dd-MM-yyyy HH:mm')}"></td>
         <td>
             <div th:switch="${user.enabled}">
                 <span th:case="true" th:text="#{admin.users.form.user.enabled}">Enabled</span>
