@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{admin.user.title(${userData.login})}"></title>
+    <title th:text="#{admin.user.title(\'${userData.login}\')}"></title>
 
     <link rel="shortcut icon" th:href="@{/public/img/ico/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
@@ -40,13 +40,13 @@
             <p th:case="true">
                 <span th:text="#{admin.users.form.user.enabled}">Enabled</span>
             <form method="post" th:action="@{disable}">
-                <button type="submit" th:value="#{admin.user.form.disable}">Disable</button>
+                <button type="submit" class="btn btn-secondary" th:value="#{admin.user.form.disable}">Disable</button>
             </form>
             </p>
             <p th:case="false">
                 <span th:text="#{admin.users.form.user.disabled}">Disabled</span>
             <form method="post" th:action="@{enable}">
-                <button type="submit" th:value="#{admin.user.form.enable}">Enable</button>
+                <button type="submit" class="btn btn-primary" th:value="#{admin.user.form.enable}">Enable</button>
             </form>
             </p>
         </div>
@@ -55,7 +55,7 @@
 
 <form th:method="delete">
     <input type="hidden" name="_method" value="delete" />
-    <button type="submit" th:value="#{admin.user.form.delete}">Delete</button>
+    <button type="submit" class="btn btn-danger" th:value="#{admin.user.form.delete}">Delete</button>
 </form>
 </body>
 </html>
