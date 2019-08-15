@@ -80,7 +80,7 @@ public class AdminController {
 
     @PostMapping("users/delete")
     public ModelAndView deleteAllUsers() {
-        ModelAndView modelAndView = new ModelAndView("admin/users?all_deleted=true");
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/users?all_deleted=true");
 
         userService.deleteAllUsersButAdmin();
 
