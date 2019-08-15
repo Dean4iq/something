@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.den.restful.model.dto.UserRegistrationDTO;
+import ua.den.restful.model.entity.Authority;
 import ua.den.restful.model.entity.User;
 import ua.den.restful.model.enums.AuthorityType;
 import ua.den.restful.model.repository.UserRepository;
@@ -58,9 +59,9 @@ public class UserService {
     }
 
     public void deleteAllUsersButAdmin() {
-        Integer roleId = authorityService.getAuthorityByRole(AuthorityType.ROLE_USER).getId();
+        Authority userAuthority = authorityService.getAuthorityByRole(AuthorityType.ROLE_USER);
 
-        userRepository.deleteByAuthority(roleId);
+        userRepository.deleteByAuthority(userAuthority);
     }
 
     private User convertUserDtoToUser(UserRegistrationDTO userDto) {
