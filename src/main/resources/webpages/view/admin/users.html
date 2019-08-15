@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{admin.users.title}">Users data</title>
+</head>
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col" th:text="#{admin.users.form.login}">Login</th>
+        <th scope="col" th:text="#{admin.users.form.name}">Name</th>
+        <th scope="col" th:text="#{admin.users.form.surname}">Surname</th>
+        <th scope="col" th:text="#{admin.users.form.registration_date}">Registration date</th>
+        <th scope="col" th:text="#{admin.users.form.enabled}">Enabled</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="user: ${userList}">
+        <th scope="row" th:text="${user.login}"></th>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.registerDate}"></td>
+        <td>
+            <div th:switch="${user.enabled}">
+                <span th:case="true" th:text="#{admin.users.form.user.enabled}">Enabled</span>
+                <span th:case="false" th:text="#{admin.users.form.user.disabled}">Disabled</span>
+            </div>
+        </td>
+        <td>
+            <form th:action="@{/users/${user.login}}" method="get">
+                <button type="submit" class="btn btn-secondary" th:text="#{admin.users.form.details}">Details</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

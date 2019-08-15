@@ -1,6 +1,8 @@
 package ua.den.restful.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.den.restful.model.dto.UserRegistrationDTO;
@@ -10,6 +12,7 @@ import ua.den.restful.model.repository.UserRepository;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -17,6 +20,14 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private AuthorityService authorityService;
+
+    public Page<User> getAllUsers(int pageNumber, int elementsOnPage) {
+        return userRepository.findAll(PageRequest.of(pageNumber, elementsOnPage));
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
     public User getUserByLogin(String login) {
         return userRepository.getUserByLogin(login);
@@ -32,6 +43,14 @@ public class UserService {
 
     public User updateUserData(User user) {
         return userRepository.save(user);
+    }
+
+    public List<User> updateAllUserData(List<User> user) {
+        return userRepository.saveAll(user);
+    }
+
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 
     private User convertUserDtoToUser(UserRegistrationDTO userDto) {
