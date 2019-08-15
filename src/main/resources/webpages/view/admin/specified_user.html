@@ -40,14 +40,14 @@
             <div th:case="true" style="display: inherit; float: right;">
                 <span th:text="#{admin.users.form.user.enabled}" style="display: inherit;">Enabled</span>
                 <form method="post" th:action="@{disable}" style="display: inherit;">
-                    <button type="submit" class="btn btn-secondary" th:value="#{admin.user.form.disable}">Disable
+                    <button type="submit" class="btn btn-secondary" th:text="#{admin.user.form.disable}">Disable
                     </button>
                 </form>
             </div>
             <div th:case="false">
                 <span th:text="#{admin.users.form.user.disabled}">Disabled</span>
                 <form method="post" th:action="@{enable}">
-                    <button type="submit" class="btn btn-primary" th:value="#{admin.user.form.enable}">Enable</button>
+                    <button type="submit" class="btn btn-primary" th:text="#{admin.user.form.enable}">Enable</button>
                 </form>
             </div>
         </div>
@@ -56,7 +56,7 @@
 
 <form th:method="delete">
     <input type="hidden" name="_method" value="delete"/>
-    <button type="submit" class="btn btn-danger" th:value="#{admin.user.form.delete}">Delete</button>
+    <button type="submit" class="btn btn-danger" th:text="#{admin.user.form.delete}">Delete</button>
 </form>
 </body>
 </html>
