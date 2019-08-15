@@ -52,7 +52,7 @@
             </div>
         </div>
     </li>
-    <form th:method="delete" th:if="${userData.authority.role == 'ROLE_USER'}">
+    <form th:method="delete" th:if="${userData.authority.role.name() == 'ROLE_USER'}">
         <input type="hidden" name="_method" value="delete"/>
         <button type="submit" class="btn btn-danger" th:text="#{admin.user.form.delete}" style="float: right; margin-top: 5vh;">Delete</button>
     </form>
