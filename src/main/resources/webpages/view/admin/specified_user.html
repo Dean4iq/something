@@ -52,11 +52,10 @@
             </div>
         </div>
     </li>
+    <form th:method="delete" style="float: right;">
+        <input type="hidden" name="_method" value="delete"/>
+        <button type="submit" class="btn btn-danger" th:text="#{admin.user.form.delete}">Delete</button>
+    </form>
 </ul>
-
-<form th:method="delete">
-    <input type="hidden" name="_method" value="delete"/>
-    <button type="submit" class="btn btn-danger" th:text="#{admin.user.form.delete}">Delete</button>
-</form>
 </body>
 </html>
