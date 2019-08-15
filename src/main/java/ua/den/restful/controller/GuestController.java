@@ -24,7 +24,11 @@ public class GuestController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage() {
+    public String getLoginPage(Principal principal) {
+        if (principal.getName() != null) {
+            return "redirect:/home";
+        }
+        
         return "guest/login";
     }
 
