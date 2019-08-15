@@ -38,6 +38,26 @@ public class AdminController {
         return modelAndView;
     }
 
+    @PostMapping("users/{login}/disable")
+    public ModelAndView disableUserAccount(@PathVariable("login") final User user) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
+
+        user.setEnabled(false);
+        userService.updateUserData(user);
+
+        return modelAndView;
+    }
+
+    @PostMapping("users/{login}/enable")
+    public ModelAndView enableUserAccount(@PathVariable("login") final User user) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
+
+        user.setEnabled(true);
+        userService.updateUserData(user);
+
+        return modelAndView;
+    }
+
     @PutMapping("users")
     public ModelAndView updateUsersData(@ModelAttribute("userList") final List<User> userList) {
         ModelAndView modelAndView = new ModelAndView("admin/users");
