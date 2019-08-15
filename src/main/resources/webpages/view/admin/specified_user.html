@@ -12,6 +12,50 @@
     <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div th:insert="parts/navbar.html :: bar"></div>
+<ul class="list-group">
+    <li class="list-group-item">
+        <span th:text="#{admin.user.form.login}"></span>
+        <span th:text="${userData.login}" style="text-align: right;"></span>
+    </li>
+    <li class="list-group-item">
+        <span th:text="#{admin.user.form.name}"></span>
+        <span th:text="${userData.name}" style="text-align: right;"></span>
+    </li>
+    <li class="list-group-item">
+        <span th:text="#{admin.user.form.surname}"></span>
+        <span th:text="${userData.surname}" style="text-align: right;"></span>
+    </li>
+    <li class="list-group-item">
+        <span th:text="#{admin.user.form.birth_date}"></span>
+        <span th:text="${userData.birthDate}" style="text-align: right;"></span>
+    </li>
+    <li class="list-group-item">
+        <span th:text="#{admin.user.form.registration_date}"></span>
+        <span th:text="${userData.registerDate}" style="text-align: right;"></span>
+    </li>
+    <li class="list-group-item">
+        <span th:text="#{admin.user.form.enabled}"></span>
+        <div th:switch="${userData.enabled}">
+            <p th:case="true">
+                <span th:text="#{admin.users.form.user.enabled}">Enabled</span>
+            <form method="post" th:action="@{disable}">
+                <button type="submit" th:value="#{admin.user.form.disable}">Disable</button>
+            </form>
+            </p>
+            <p th:case="false">
+                <span th:text="#{admin.users.form.user.disabled}">Disabled</span>
+            <form method="post" th:action="@{enable}">
+                <button type="submit" th:value="#{admin.user.form.enable}">Enable</button>
+            </form>
+            </p>
+        </div>
+    </li>
+</ul>
 
+<form th:method="delete">
+    <input type="hidden" name="_method" value="delete" />
+    <button type="submit" th:value="#{admin.user.form.delete}">Delete</button>
+</form>
 </body>
 </html>
