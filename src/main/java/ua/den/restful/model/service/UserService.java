@@ -11,6 +11,7 @@ import ua.den.restful.model.entity.User;
 import ua.den.restful.model.enums.AuthorityType;
 import ua.den.restful.model.repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -58,6 +59,7 @@ public class UserService {
         userRepository.deleteAll();
     }
 
+    @Transactional
     public void deleteAllUsersButAdmin() {
         Authority userAuthority = authorityService.getAuthorityByRole(AuthorityType.ROLE_USER);
 
