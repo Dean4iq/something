@@ -42,28 +42,28 @@ public class AdminController {
     @PostMapping("users/{login}/disable")
     public ModelAndView disableUserAccount(@PathVariable("login") final User user) {
         if (user.getAuthority().getRole().equals(AuthorityType.ROLE_USER)) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
+            ModelAndView modelAndView = new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?updated=true");
 
             user.setEnabled(false);
             userService.updateUserData(user);
 
             return modelAndView;
         } else {
-            return new ModelAndView("redirect:/admin/" + user.getLogin() + "?unaccepted=true");
+            return new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?unacceptable=true");
         }
     }
 
     @PostMapping("users/{login}/enable")
     public ModelAndView enableUserAccount(@PathVariable("login") final User user) {
         if (user.getAuthority().getRole().equals(AuthorityType.ROLE_USER)) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/admin/" + user.getLogin() + "?updated=true");
+            ModelAndView modelAndView = new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?updated=true");
 
             user.setEnabled(true);
             userService.updateUserData(user);
 
             return modelAndView;
         } else {
-            return new ModelAndView("redirect:/admin/" + user.getLogin() + "?unaccepted=true");
+            return new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?unacceptable=true");
         }
     }
 
