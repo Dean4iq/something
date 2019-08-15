@@ -108,7 +108,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         ResourceHttpRequestHandler requestHandler
                 = new ResourceHttpRequestHandler();
         ClassPathResource classPathResource
-                = new ClassPathResource("img/ico");
+                = new ClassPathResource("public/img/ico");
         List<Resource> locations = Arrays.asList(classPathResource);
         requestHandler.setLocations(locations);
         return requestHandler;
