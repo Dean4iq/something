@@ -91,8 +91,8 @@ public class AdminController {
     public ModelAndView deleteUserAccount(@PathVariable("login") final User user) {
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/users?acc_deleted=true");
 
-        userService.deleteUser(user);
         modelAndView.addObject("userAccount", user.getLogin());
+        userService.deleteUser(user);
 
         return modelAndView;
     }
