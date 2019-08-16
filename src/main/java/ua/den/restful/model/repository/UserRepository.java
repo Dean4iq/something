@@ -6,10 +6,12 @@ import org.springframework.data.repository.query.Param;
 import ua.den.restful.model.entity.Authority;
 import ua.den.restful.model.entity.User;
 
+import java.util.List;
+
 public interface UserRepository extends JpaRepository<User, String> {
     User getUserByLogin(String login);
     void deleteByAuthority(Authority authority);
 
-    @Query(value = "UPDATE users SET enabled=:enabled WHERE authority=:authorityId ;", nativeQuery = true)
-    void updateUsersByAuthority(@Param("enabled") boolean enabled, @Param("authorityId") int authorityId);
+    @Query(value = "UPDATE public.users SET enabled = :enabled WHERE authority = :authorityId", nativeQuery = true)
+    List<User> updateUsersByAuthority(@Param("enabled") boolean enabled, @Param("authorityId") int authorityId);
 }
