@@ -54,16 +54,24 @@
     </tr>
     </tbody>
 </table>
-<form th:action="@{/admin/users/delete}" method="post">
-    <button type="submit" class="btn btn-danger" th:text="#{admin.users.form.delete_all}">Delete all users</button>
-</form>
-<form th:action="@{/admin/users/updateStatus}" method="post">
-    <input type="hidden" name="account_status" value="true"/>
-    <button type="submit" class="btn btn-warning" th:text="#{admin.users.form.enable_all}">Enable all users</button>
-</form>
-<form th:action="@{/admin/users/updateStatus}" method="post">
-    <input type="hidden" name="account_status" value="false"/>
-    <button type="submit" class="btn btn-warning" th:text="#{admin.users.form.disable_all}">Disable all users</button>
-</form>
+<div style="display:inline;">
+    <form th:action="@{/admin/users/delete}" method="post" style="display:inherit;">
+        <button type="submit" class="btn btn-danger" th:text="#{admin.users.form.delete_all}" style="display:inherit;">
+            Delete all users
+        </button>
+    </form>
+    <form th:action="@{/admin/users/updateStatus}" method="post" style="display:inherit;">
+        <input type="hidden" name="account_status" value="true"/>
+        <button type="submit" class="btn btn-warning" th:text="#{admin.users.form.enable_all}" style="display:inherit;">
+            Enable all users
+        </button>
+    </form>
+    <form th:action="@{/admin/users/updateStatus}" method="post" style="display:inherit;">
+        <input type="hidden" name="account_status" value="false"/>
+        <button type="submit" class="btn btn-warning" th:text="#{admin.users.form.disable_all}"
+                style="display:inherit;">Disable all users
+        </button>
+    </form>
+</div>
 </body>
 </html>
