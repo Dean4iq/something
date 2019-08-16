@@ -1,7 +1,6 @@
 package ua.den.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -74,8 +74,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and()
                 .sessionManagement()
+                .invalidSessionUrl("/login?inv_session=true")
                 .maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?expired=true")
-                .sessionRegistry(sessionRegistry());
+                .sessionRegistry(sessionRegistry())
+                .and()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
         http.requiresChannel()
                 .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
@@ -88,10 +91,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return sessionRegistry;
     }
 
-    // Register HttpSessionEventPublisher
     @Bean
-    public static ServletListenerRegistrationBean httpSessionEventPublisher() {
-        return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 
     @Bean
