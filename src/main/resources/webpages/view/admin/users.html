@@ -59,11 +59,11 @@
 </form>
 <form th:action="@{/admin/users/updateStatus}" method="post">
     <input type="hidden" name="account_status" value="true"/>
-    <button type="submit" class="btn btn-warn" th:text="#{admin.users.form.enable_all}">Enable all users</button>
+    <button type="submit" class="btn btn-warning" th:text="#{admin.users.form.enable_all}">Enable all users</button>
 </form>
 <form th:action="@{/admin/users/updateStatus}" method="post">
     <input type="hidden" name="account_status" value="false"/>
-    <button type="submit" class="btn btn-warn" th:text="#{admin.users.form.disable_all}">Disable all users</button>
+    <button type="submit" class="btn btn-warning" th:text="#{admin.users.form.disable_all}">Disable all users</button>
 </form>
 </body>
 </html>
