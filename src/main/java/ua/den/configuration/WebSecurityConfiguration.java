@@ -70,6 +70,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and()
                 .sessionManagement()
+                .sessionAuthenticationErrorUrl("/login?taken=true")
                 .maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?expired=true");
 
         http.requiresChannel()
