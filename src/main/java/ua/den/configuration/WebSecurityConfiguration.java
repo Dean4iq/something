@@ -67,7 +67,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
                 .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+                .and()
+                .sessionManagement()
+                .maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?expired=true");
 
         http.requiresChannel()
                 .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
