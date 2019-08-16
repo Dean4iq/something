@@ -57,7 +57,7 @@
         </div>
     </li>
 
-    <form th:method="post" th:action="@{'/admin/users/{login}/delete'(login=${userData.login})}" th:if="${userData.authority.role == T(ua.den.restful.model.enums.AuthorityType).ROLE_USER}">
+    <form th:method="post" th:action="@{'/admin/users/{login}/delete'(login=${userData.login})}" th:if="${userData.authority.role == T(ua.den.model.enums.AuthorityType).ROLE_USER}">
         <button type="submit" class="btn btn-danger" th:text="#{admin.user.form.delete}" style="float: right; margin-top: 5vh;">Delete</button>
     </form>
 </ul>
