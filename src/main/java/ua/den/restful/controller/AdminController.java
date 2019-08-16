@@ -1,10 +1,12 @@
 package ua.den.restful.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import ua.den.restful.model.entity.User;
 import ua.den.restful.model.enums.AuthorityType;
 import ua.den.restful.model.service.UserService;
@@ -76,6 +78,13 @@ public class AdminController {
         modelAndView.addObject("userList", updatedUsers);
 
         return modelAndView;
+    }
+
+    @PostMapping("users/updateStatus")
+    public String updateAllUsersStatus(@RequestParam("account_status") boolean status) {
+        userService.updateUsersAccountStatus(status);
+
+        return "redirect:/admin/users?all_updated=true";
     }
 
     @PostMapping("users/delete")

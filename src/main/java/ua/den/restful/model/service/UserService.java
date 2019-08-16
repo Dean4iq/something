@@ -47,6 +47,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void updateUsersAccountStatus(boolean status) {
+        userRepository.updateUsersByAuthority(status, authorityService.getAuthorityByRole(AuthorityType.ROLE_USER).getId());
+    }
+
     public List<User> updateAllUserData(List<User> user) {
         return userRepository.saveAll(user);
     }

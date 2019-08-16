@@ -18,6 +18,8 @@
      th:text="#{admin.users.alert.all_deleted}"></div>
 <div th:if="${param.acc_deleted}" class="alert alert-success" role="alert"
      th:text="#{admin.users.alert.acc_deleted(${param.userAccount})}"></div>
+<div th:if="${param.all_updated}" class="alert alert-success" role="alert"
+     th:text="#{admin.users.alert.all_updated}"></div>
 
 <table class="table table-striped" style="margin-top: 5vh;">
     <caption style="caption-side: top; text-align: center;" th:text="#{admin.users.table.caption}"></caption>
@@ -54,6 +56,14 @@
 </table>
 <form th:action="@{/admin/users/delete}" method="post">
     <button type="submit" class="btn btn-danger" th:text="#{admin.users.form.delete_all}">Delete all users</button>
+</form>
+<form th:action="@{/admin/users/updateStatus}" method="post">
+    <input type="hidden" name="account_status" value="true"/>
+    <button type="submit" class="btn btn-warn" th:text="#{admin.users.form.enable_all}">Enable all users</button>
+</form>
+<form th:action="@{/admin/users/updateStatus}" method="post">
+    <input type="hidden" name="account_status" value="false"/>
+    <button type="submit" class="btn btn-warn" th:text="#{admin.users.form.disable_all}">Disable all users</button>
 </form>
 </body>
 </html>
