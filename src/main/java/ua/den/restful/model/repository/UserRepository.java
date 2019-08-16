@@ -10,6 +10,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     User getUserByLogin(String login);
     void deleteByAuthority(Authority authority);
 
-    @Query(value = "UPDATE users SET enabled=:enabled WHERE authority=:authorityId;", nativeQuery = true)
+    @Query(value = "UPDATE users SET enabled=:enabled WHERE authority=:authorityId ;", nativeQuery = true)
     void updateUsersByAuthority(@Param("enabled") boolean enabled, @Param("authorityId") int authorityId);
 }
