@@ -6,22 +6,22 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "user", schema = "public", uniqueConstraints = {@UniqueConstraint(columnNames = "login")})
 public class User implements Serializable {
     private static final long serialVersionUID = 45721234567844554L;
 
-    @Column
     @Id
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(name = "surname", nullable = false)
     private String surname;
     @Column(name = "register_date", nullable = false)
     private Timestamp registerDate;
-    @Column(nullable = false)
+    @Column(name = "enabled", nullable = false)
     private boolean enabled;
     @Column(name = "birth_date", nullable = false)
     private Timestamp birthDate;
