@@ -39,20 +39,8 @@ public class AuthorizedController {
     public Map<String, String> manageSupportMessage(@RequestParam("name_sender") @NotBlank String name,
                                                     @RequestParam("email_sender") @NotBlank String email,
                                                     @RequestParam("subject") @NotBlank String subject,
-                                                    @RequestParam("text") @NotEmpty String text,
-                                                    BindingResult bindingResult) {
-        Map<String, String> message = new HashMap<>();
-
-        if (bindingResult.hasErrors()) {
-            List<FieldError> errors = bindingResult.getFieldErrors();
-
-            for (FieldError e : errors) {
-                message.put("@" + e.getField().toUpperCase(), e.getDefaultMessage());
-            }
-
-            message.put("status", "input_errors");
-            return message;
-        }
+                                                    @RequestParam("text") @NotEmpty String text) {
+        Map<String, String> message = new HashMap<>(1);
 
         message.put("status", "success");
         return message;
