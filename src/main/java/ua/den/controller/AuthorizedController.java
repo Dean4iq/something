@@ -56,10 +56,10 @@ public class AuthorizedController {
         if (violations.size() != 0) {
             messages.put("status", "input_errors");
 
-            List<String[]> fieldsWithErrors = new ArrayList<>();
+            Map<String, String[]> fieldsWithErrors = new HashMap<>();
 
             for (ConstraintViolation<UserApplySupportDto> violation : violations) {
-                fieldsWithErrors.add(new String[]{violation.getPropertyPath().toString(), violation.getMessage()});
+                fieldsWithErrors.put("field", new String[]{violation.getPropertyPath().toString(), violation.getMessage()});
             }
 
             messages.put("fields", fieldsWithErrors);

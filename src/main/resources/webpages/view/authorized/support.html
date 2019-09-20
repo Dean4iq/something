@@ -39,8 +39,8 @@
             } else if (response.status === 'input_errors') {
                 for (var item in response.fields) {
                     $(item[0]).val(/*[[#{item[1]}]]*/);
-                    console.log(item[0]);
-                    console.log(item[1]);
+                    console.log(item.field[0]);
+                    console.log(item.field[1]);
                 }
             } else {
                 alert('Something unexpected happens');
