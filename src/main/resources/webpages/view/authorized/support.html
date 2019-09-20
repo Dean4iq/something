@@ -40,7 +40,7 @@
                 for (var i = 0; i < response.fields.length; i = i + 2) {
                     var field = response.fields[i];
                     var msg = response.fields[i+1];
-                    $(item[field]).val(/*[[#{msg}]]*/);
+                    $(field).val(/*[[#{msg}]]*/);
                     console.log(field);
                     console.log(msg);
                 }
