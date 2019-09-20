@@ -78,7 +78,7 @@
     <div class="form-group">
         <label for="subject_inp" th:text="#{support.subject}">Subject</label>
         <select id="subject_inp" class="form-control" name="subject">
-            <option th:each="subjectValue: ${subjects}" th:value="#{subjectValue}" th:text="#{subjectValue}"></option>
+            <option th:each="subjectValue : ${subjects}" th:value="#{${subjectValue}}" th:text="#{${subjectValue}}"></option>
         </select>
     </div>
 
