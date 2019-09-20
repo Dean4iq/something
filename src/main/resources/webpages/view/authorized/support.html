@@ -34,9 +34,7 @@
         });
 
         var processOutput = function(response) {
-            var status = item.status;
-
-            if (status === 'success') {
+            if (response === 'success') {
                 alert('Success');
             } else if (response.status === 'input_errors') {
                 for (var item in response.fields) {
