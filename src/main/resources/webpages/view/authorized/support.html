@@ -17,7 +17,7 @@
                     type: 'POST',
                     url: '/support-output',
                     dataType: 'json',
-                    data: $("form_application").serialize(),
+                    data: $("form").serialize(),
                     success: function(result) {
                         alert('Success');
                     },
@@ -37,7 +37,7 @@
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
 
-<form id="form_application">
+<form>
     <div class="form-group">
         <label for="name_inp" th:text="#{support.name}">Name</label>
         <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name_sender" required/>
