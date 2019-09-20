@@ -60,6 +60,7 @@
         <label for="name_inp" th:text="#{support.name}">Name</label>
         <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name" required/>
         <small id="nameHelp" class="form-text text-muted" th:text="#{support.hint.name}"></small>
+        <div id="name-error" style="color: red;"></div>
     </div>
 
     <div class="form-group">
@@ -67,6 +68,7 @@
         <input id="email_inp" aria-describedby="emailHelp" class="form-control" type="text" name="email"
                required/>
         <small id="emailHelp" class="form-text text-muted" th:text="#{support.hint.email}"></small>
+        <div id="email-error" style="color: red;"></div>
     </div>
 
     <div class="form-group">
@@ -74,11 +76,13 @@
         <select id="subject_inp" class="form-control" name="subject" required>
             <option>1</option>
         </select>
+        <div id="subject-error" style="color: red;"></div>
     </div>
 
     <div class="form-group">
         <label for="text_inp" th:text="#{support.text}">Text</label>
         <textarea id="text_inp" class="form-control" style="resize: vertical;" name="text" required></textarea>
+        <div id="text-error" style="color: red;"></div>
     </div>
 
     <button type="submit" id="submit_form" name="submit_form" class="btn btn-info" th:text="#{support.submit}">Submit

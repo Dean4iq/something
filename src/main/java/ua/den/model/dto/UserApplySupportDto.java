@@ -1,21 +1,19 @@
 package ua.den.model.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class UserApplySupportDto implements Serializable {
     private static final long serialVersionUID = 8927423443534534211L;
 
-    @NotBlank
+    @NotBlank(message = "field.blank")
     private String name;
-    @NotBlank
+    @NotBlank(message = "field.blank")
     private String email;
-    @NotNull
+    @NotBlank(message = "field.blank")
     private String subject;
-    @NotEmpty
+    @NotBlank(message = "field.blank")
     private String text;
 
     public String getName() {

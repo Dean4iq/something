@@ -60,7 +60,7 @@ public class AuthorizedController {
             int iteration = 0;
 
             for (ConstraintViolation<UserApplySupportDto> violation : violations) {
-                fieldsWithErrors[iteration++] = violation.getPropertyPath().toString();
+                fieldsWithErrors[iteration++] = violation.getPropertyPath().toString() + "-error";
                 fieldsWithErrors[iteration++] = violation.getMessage();
             }
 
