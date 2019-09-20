@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{support.title}">Support</title>
+    <link rel="shortcut icon" th:href="@{/public/img/ico/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div th:insert="parts/navbar.html :: bar"></div>
 
+<form>
+    <div class="form-group">
+        <label for="name_inp" th:text="#{support.name}">Name</label>
+        <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name_sender" required/>
+        <small id="nameHelp" class="form-text text-muted" th:text="#{support.hint.name}"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="email_inp" th:text="#{support.email}">Email</label>
+        <input id="email_inp" aria-describedby="emailHelp" class="form-control" type="text" name="email_sender" required/>
+        <small id="emailHelp" class="form-text text-muted" th:text="#{support.hint.email}"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="subject_inp" th:text="#{support.subject}">Subject</label>
+        <select id="subject_inp" class="form-control" name="subject" required>
+            <option>1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="text_inp" th:text="#{support.text}">Text</label>
+        <textarea id="text_inp" class="form-control" style="resize: vertical;" name="text" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-info" th:text="#{support.submit}">Submit</button>
+</form>
 </body>
 </html>
