@@ -34,12 +34,12 @@ public class AuthorizedController {
         return "authorized/support";
     }
 
-    @PostMapping(value = "support-output", produces = "application/json")
+    @RequestMapping(value = "support-output", produces = "application/json", method = RequestMethod.POST)
     @ResponseBody()
-    public Map<String, String> manageSupportMessage(@RequestParam("name_inp") @NotBlank String name,
-                                                    @RequestParam("email_inp") @NotBlank String email,
-                                                    @RequestParam("subject_inp") @NotBlank String subject,
-                                                    @RequestParam("text_inp") @NotEmpty String text,
+    public Map<String, String> manageSupportMessage(@RequestParam("name_sender") @NotBlank String name,
+                                                    @RequestParam("email_sender") @NotBlank String email,
+                                                    @RequestParam("subject") @NotBlank String subject,
+                                                    @RequestParam("text") @NotEmpty String text,
                                                     BindingResult bindingResult) {
         Map<String, String> message = new HashMap<>();
 
