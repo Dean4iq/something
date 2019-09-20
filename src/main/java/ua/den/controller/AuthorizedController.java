@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class AuthorizedController {
@@ -58,12 +56,10 @@ public class AuthorizedController {
         if (violations.size() != 0) {
             messages.put("status", "input_errors");
 
-            String[][] fieldsWithErrors = new String[violations.size()][2];
-            int iteration = 0;
+            List<String[]> fieldsWithErrors = new ArrayList<>();
 
             for (ConstraintViolation<UserApplySupportDto> violation : violations) {
-                fieldsWithErrors[iteration][0] = violation.getPropertyPath().toString();
-                fieldsWithErrors[iteration++][1] = violation.getMessage();
+                fieldsWithErrors.add(new String[]{violation.getPropertyPath().toString(), violation.getMessage()});
             }
 
             messages.put("fields", fieldsWithErrors);
