@@ -21,8 +21,6 @@
                     dataType: 'json',
                     data: $("form").serialize(),
                     success: function(result) {
-                        var response = JSON.parse(result);
-
                         processOutput(response);
                     },
 
@@ -34,7 +32,9 @@
         });
 
         var processOutput = function(response) {
-            if (response === 'success') {
+            var response = JSON.parse(result);
+
+            if (response.status === 'success') {
                 alert('Success');
             } else if (response.status === 'input_errors') {
                 for (var item in response.fields) {
