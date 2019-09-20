@@ -37,7 +37,7 @@
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
 
-<form>
+<form th:object="${userApplySupportDto}">
     <div class="form-group">
         <label for="name_inp" th:text="#{support.name}">Name</label>
         <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name_sender" required/>
