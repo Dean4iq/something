@@ -39,7 +39,7 @@
             } else if (response.status === 'input_errors') {
                 for (var i = 0; i < response.fields.length; i = i + 2) {
                     var field = response.fields[i];
-                    $('#'+field).attr('th:value','#{'+response.fields[i+1]+'}');
+                    $('#'+field).attr('th:errors','*{'+response.fields[i+1]+'}');
                 }
             } else {
                 alert('Something unexpected happens');
