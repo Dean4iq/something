@@ -8,13 +8,13 @@ import java.util.Objects;
 public class UserApplySupportDto implements Serializable {
     private static final long serialVersionUID = 8927423443534534211L;
 
-    @NotBlank(message = "support.err.empty_field")
+    @NotBlank
     private String name;
-    @NotBlank(message = "support.err.empty_field")
+    @NotBlank
     private String email;
-    @NotNull(message = "support.err.empty_field")
+
     private String subject;
-    @NotBlank(message = "support.err.empty_field")
+    @NotBlank
     private String text;
 
     public String getName() {

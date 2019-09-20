@@ -32,19 +32,25 @@
         });
 
         var processOutput = function(result) {
+            clearErrorFields();
             var response = JSON.parse(JSON.stringify(result));
 
             if (response.status === 'success') {
                 alert('Success');
             } else if (response.status === 'input_errors') {
-                for (var i = 0; i < response.fields.length; i = i + 2) {
+                for (var i = 0; i < response.fields.length; i++) {
                     var field = response.fields[i];
-                    var message = /*[[#{response.fields[i + 1]}]]*/ '';
-                    $('#'+field).html(message);
+                    $('#'+field).css('display', 'block');
                 }
             } else {
                 alert('Something unexpected happens');
             }
+        }
+
+        var clearErrorFields = function() {
+            $('#name-error').css('display', 'none');
+            $('#email-error').css('display', 'none');
+            $('#text-error').css('display', 'none');
         }
 
         /*]]>*/
@@ -58,7 +64,7 @@
         <label for="name_inp" th:text="#{support.name}">Name</label>
         <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name" required/>
         <small id="nameHelp" class="form-text text-muted" th:text="#{support.hint.name}"></small>
-        <div id="name-error" style="color: red;"></div>
+        <div id="name-error" style="color: red; display:none;" th:text="#{support.err.empty_field}"></div>
     </div>
 
     <div class="form-group">
@@ -66,7 +72,7 @@
         <input id="email_inp" aria-describedby="emailHelp" class="form-control" type="text" name="email"
                required/>
         <small id="emailHelp" class="form-text text-muted" th:text="#{support.hint.email}"></small>
-        <div id="email-error" style="color: red;"></div>
+        <div id="email-error" style="color: red; display:none;" th:text="#{support.err.empty_field}"></div>
     </div>
 
     <div class="form-group">
@@ -74,13 +80,12 @@
         <select id="subject_inp" class="form-control" name="subject" required>
             <option>1</option>
         </select>
-        <div id="subject-error" style="color: red;"></div>
     </div>
 
     <div class="form-group">
         <label for="text_inp" th:text="#{support.text}">Text</label>
         <textarea id="text_inp" class="form-control" style="resize: vertical;" name="text" required></textarea>
-        <div id="text-error" style="color: red;"></div>
+        <div id="text-error" style="color: red; display:none;" th:text="#{support.err.empty_field}"></div>
     </div>
 
     <button type="submit" id="submit_form" name="submit_form" class="btn btn-info" th:text="#{support.submit}">Submit
