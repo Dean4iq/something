@@ -11,14 +11,19 @@
 
     <script>
         $(document).ready(function() {
-            $("#submit_form").click(function() {
+            $("#submit_form").click(function(e) {
+                e.preventDefault();
                 $.ajax({
                     type: 'POST',
-                    url: 'support-output',
+                    url: '/support-output',
                     dataType: 'json',
-                    data: ${"form_application"}.serialize(),
-                    success: function(data){alert('Success');},
-                    error: function(data){}
+                    data: $("form_application").serialize(),
+                    success: function(result) {
+                        alert('Success');
+                    },
+                    error: function(result) {
+                        alert('Error');
+                    }
                 });
             });
         });
@@ -55,7 +60,7 @@
         <textarea id="text_inp" class="form-control" style="resize: vertical;" name="text" required></textarea>
     </div>
 
-    <button type="submit" id="submit_form" class="btn btn-info" th:text="#{support.submit}">Submit</button>
+    <button type="submit" id="submit_form" name="submit_form" class="btn btn-info" th:text="#{support.submit}">Submit</button>
 </form>
 </body>
 </html>
