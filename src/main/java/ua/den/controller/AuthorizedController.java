@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.UserApplySupportDto;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,17 +33,20 @@ public class AuthorizedController {
     }
 
     @GetMapping("support")
-    public ModelAndView getSupportPage() {
-        ModelAndView modelAndView = new ModelAndView("authorized/support");
-
-        modelAndView.addObject("userApplySupportDto", new UserApplySupportDto());
-
-        return modelAndView;
+    public String getSupportPage() {
+        return "authorized/support";
     }
 
     @RequestMapping(value = "support-output", produces = "application/json", method = RequestMethod.POST)
     @ResponseBody()
-    public Map<String, String> manageSupportMessage(UserApplySupportDto userApplySupportDto) {
+    public Map<String, String> manageSupportMessage(String name, String email, String subject, String text) {
+        UserApplySupportDto userApplySupportDto = new UserApplySupportDto();
+
+        userApplySupportDto.setName(name);
+        userApplySupportDto.setEmail(email);
+        userApplySupportDto.setSubject(subject);
+        userApplySupportDto.setText(text);
+
         Map<String, String> message = new HashMap<>(1);
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<UserApplySupportDto>> violations = validator.validate(userApplySupportDto);

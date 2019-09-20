@@ -37,16 +37,16 @@
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
 
-<form th:object="${userApplySupportDto}">
+<form>
     <div class="form-group">
         <label for="name_inp" th:text="#{support.name}">Name</label>
-        <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name_sender" required/>
+        <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name" required/>
         <small id="nameHelp" class="form-text text-muted" th:text="#{support.hint.name}"></small>
     </div>
 
     <div class="form-group">
         <label for="email_inp" th:text="#{support.email}">Email</label>
-        <input id="email_inp" aria-describedby="emailHelp" class="form-control" type="text" name="email_sender"
+        <input id="email_inp" aria-describedby="emailHelp" class="form-control" type="text" name="email"
                required/>
         <small id="emailHelp" class="form-text text-muted" th:text="#{support.hint.email}"></small>
     </div>
