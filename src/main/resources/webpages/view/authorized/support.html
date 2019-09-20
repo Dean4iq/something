@@ -32,7 +32,7 @@
         });
 
         var processOutput = function(result) {
-            var response = JSON.parse(result);
+            var response = JSON.parse(JSON.stringify(result));
 
             if (response.status === 'success') {
                 alert('Success');
