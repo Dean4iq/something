@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.UserApplySupportDto;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +32,12 @@ public class AuthorizedController {
     }
 
     @GetMapping("support")
-    public String getSupportPage() {
-        return "authorized/support";
+    public ModelAndView getSupportPage() {
+        ModelAndView modelAndView = new ModelAndView("authorized/support");
+
+        modelAndView.addObject("subjects", getSubjectsList());
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "support-output", produces = "application/json", method = RequestMethod.POST)
@@ -46,6 +51,12 @@ public class AuthorizedController {
         userApplySupportDto.setText(text);
 
         return validateFieldsAndGetStatusMap(userApplySupportDto);
+    }
+
+    private List<String> getSubjectsList() {
+        String[] subjects = new String[]{"support.subject.technical_difficulties", "support.subject.user_report", "support.subject.other"};
+
+        return Arrays.asList(subjects);
     }
 
     private Map<String, Object> validateFieldsAndGetStatusMap(UserApplySupportDto object) {

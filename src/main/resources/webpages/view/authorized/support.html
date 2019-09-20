@@ -59,7 +59,7 @@
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
 
-<form>
+<form style="margin: 0 15px 0 15px;">
     <div class="form-group">
         <label for="name_inp" th:text="#{support.name}">Name</label>
         <input id="name_inp" aria-describedby="nameHelp" class="form-control" type="text" name="name" required/>
@@ -77,8 +77,8 @@
 
     <div class="form-group">
         <label for="subject_inp" th:text="#{support.subject}">Subject</label>
-        <select id="subject_inp" class="form-control" name="subject" required>
-            <option>1</option>
+        <select id="subject_inp" class="form-control" name="subject">
+            <option th:each="subject: ${subjects}" th:value="#{subject}"></option>
         </select>
     </div>
 
