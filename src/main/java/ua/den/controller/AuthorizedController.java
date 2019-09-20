@@ -29,6 +29,11 @@ public class AuthorizedController {
         return "authorized/access_denied";
     }
 
+    @GetMapping("support")
+    public String getSupportPage() {
+        return "authorized/support";
+    }
+
     @PostMapping(value = "support-output", produces = "application/json")
     @ResponseBody()
     public Map<String, String> manageSupportMessage(@RequestParam("name_inp") @NotBlank String name,
