@@ -47,20 +47,24 @@ public class AuthorizedController {
         userApplySupportDto.setSubject(subject);
         userApplySupportDto.setText(text);
 
-        Map<String, String> message = new HashMap<>(1);
+        return validateFieldsAndGetStatusMap(userApplySupportDto);
+    }
+
+    private Map<String, String> validateFieldsAndGetStatusMap(UserApplySupportDto object) {
+        Map<String, String> messages = new HashMap<>(1);
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<UserApplySupportDto>> violations = validator.validate(userApplySupportDto);
+        Set<ConstraintViolation<UserApplySupportDto>> violations = validator.validate(object);
 
         if (violations.size() != 0) {
+            messages.put("status", "input_errors");
             for (ConstraintViolation<UserApplySupportDto> violation : violations) {
-                message.put(violation.getPropertyPath().toString(), violation.getMessage());
+                messages.put(violation.getPropertyPath().toString(), violation.getMessage());
             }
 
-            message.put("status", "input_errors");
-            return message;
+            return messages;
         }
 
-        message.put("status", "success");
-        return message;
+        messages.put("status", "success");
+        return messages;
     }
 }
