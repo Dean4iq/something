@@ -39,10 +39,8 @@
             } else if (response.status === 'input_errors') {
                 for (var i = 0; i < response.fields.length; i = i + 2) {
                     var field = response.fields[i];
-                    var msg = response.fields[i+1];
-                    $('#'+field).html(/*[[#{msg}]]*/);
-                    console.log(field);
-                    console.log(msg);
+                    var msg = /*[[#{response.fields[i+1]}]]*/;
+                    $('#'+field).html(msg);
                 }
             } else {
                 alert('Something unexpected happens');
