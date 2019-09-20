@@ -9,7 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 
-    <script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
         $(document).ready(function() {
             $("#submit_form").click(function(e) {
                 e.preventDefault();
@@ -19,19 +21,33 @@
                     dataType: 'json',
                     data: $("form").serialize(),
                     success: function(result) {
-                        alert('Success');
+                        var response = JSON.parse(result);
+
+                        processOutput(response);
                     },
 
                     error: function(result) {
-                        alert('Error');
-                        console.log(result);
-                        console.log(JSON.parse(result));
+                        alert('Error has occurred. Try again later');
                     }
                 });
             });
         });
 
+        var processOutput = function(response) {
+            var status = item.status;
 
+            if (status === 'success') {
+                alert('Success');
+            } else if (response.status === 'input_errors') {
+                for (var item in response.fields) {
+                    $(item[0]).val(/*[[#{item[1]}]]*/);
+                }
+            } else {
+                alert('Something unexpected happens');
+            }
+        }
+
+        /*]]>*/
     </script>
 </head>
 <body>
@@ -63,7 +79,8 @@
         <textarea id="text_inp" class="form-control" style="resize: vertical;" name="text" required></textarea>
     </div>
 
-    <button type="submit" id="submit_form" name="submit_form" class="btn btn-info" th:text="#{support.submit}">Submit</button>
+    <button type="submit" id="submit_form" name="submit_form" class="btn btn-info" th:text="#{support.submit}">Submit
+    </button>
 </form>
 </body>
 </html>

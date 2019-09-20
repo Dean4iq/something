@@ -39,7 +39,7 @@ public class AuthorizedController {
 
     @RequestMapping(value = "support-output", produces = "application/json", method = RequestMethod.POST)
     @ResponseBody()
-    public Map<String, String> manageSupportMessage(String name, String email, String subject, String text) {
+    public Map<String, Object> manageSupportMessage(String name, String email, String subject, String text) {
         UserApplySupportDto userApplySupportDto = new UserApplySupportDto();
 
         userApplySupportDto.setName(name);
@@ -50,16 +50,22 @@ public class AuthorizedController {
         return validateFieldsAndGetStatusMap(userApplySupportDto);
     }
 
-    private Map<String, String> validateFieldsAndGetStatusMap(UserApplySupportDto object) {
-        Map<String, String> messages = new HashMap<>(1);
+    private Map<String, Object> validateFieldsAndGetStatusMap(UserApplySupportDto object) {
+        Map<String, Object> messages = new HashMap<>(1);
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<UserApplySupportDto>> violations = validator.validate(object);
 
         if (violations.size() != 0) {
             messages.put("status", "input_errors");
+            String[][] fieldsWithErrors = new String[2][violations.size()];
+            int iteration = 0;
+
             for (ConstraintViolation<UserApplySupportDto> violation : violations) {
-                messages.put(violation.getPropertyPath().toString(), violation.getMessage());
+                fieldsWithErrors[0][iteration] = violation.getPropertyPath().toString();
+                fieldsWithErrors[1][iteration++] = violation.getMessage();
             }
+
+            messages.put("fields", fieldsWithErrors);
 
             return messages;
         }
