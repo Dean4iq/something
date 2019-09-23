@@ -185,7 +185,7 @@
         <h2 align="center"><span th:text="#{sign_up.popup.terms_of_use.header}"></span></h2>
         <div th:insert="guest/TermsOfUseContent.html :: terms"></div>
 
-        <button class="btn btn-success" onclick="javascript:PopUpHide()">Accept</button>
+        <button class="btn btn-success" onclick="javascript:PopUpHide()" th:text="#{sign_up.popup.terms_of_use.button}">Accept</button>
     </div>
 </div>
 
@@ -194,7 +194,7 @@
         <h2 align="center"><span th:text="#{sign_up.popup.privacy_policy.header}"></span></h2>
         <div th:insert="guest/PrivacyPolicyContent.html :: terms"></div>
 
-        <button class="btn btn-success" onclick="javascript:PopUpHide()">Accept</button>
+        <button class="btn btn-success" onclick="javascript:PopUpHide()" th:text="#{sign_up.popup.terms_of_use.button}">Accept</button>
     </div>
 </div>
 </body>
