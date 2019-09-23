@@ -68,11 +68,15 @@
         $(document).ready(function(){
             PopUpHide();
         });
-        function PopUpShow(){
-            $("#popup1").show();
+        function TermsOfUseShow(){
+            $("#terms_of_use").show();
+        }
+        function PrivacyPolicyShow(){
+            $("#privacy_policy").show();
         }
         function PopUpHide(){
-            $("#popup1").hide();
+            $("#privacy_policy").hide();
+            $("#terms_of_use").hide();
         }
     </script>
 </head>
@@ -164,10 +168,17 @@
         </div>
     </div>
 </form>
-<div class="b-popup" id="popup1">
+<div class="b-popup" id="terms_of_use">
     <div class="b-popup-content">
-        Text in Popup
-        <a href="javascript:PopUpHide()">Hide popup</a>
+        Terms of use
+        <a href="javascript:PopUpHide()" style="display:block;">Accept</a>
+    </div>
+</div>
+
+<div class="b-popup" id="privacy_policy">
+    <div class="b-popup-content">
+        Privacy policy
+        <a href="javascript:PopUpHide()" style="display:block;">Accept</a>
     </div>
 </div>
 </body>
