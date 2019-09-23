@@ -155,9 +155,9 @@
                            th:field="*{rulesAccepted}" required/>
                     <label for="agreementAcceptance">
                         <span th:text="#{sign_up.form.rules}"></span>
-                        <a href="javascript:PopUpShow()" th:text="#{sign_up.form.agreements.terms_of_use}"></a>
+                        <a href="javascript:TermsOfUseShow()" th:text="#{sign_up.form.agreements.terms_of_use}"></a>
                         <span th:text="#{sign_up.form.agreements.and}"></span>
-                        <a href="javascript:PopUpShow()" th:text="#{sign_up.form.agreements.privacy_policy}"></a>
+                        <a href="javascript:PrivacyPolicyShow()" th:text="#{sign_up.form.agreements.privacy_policy}"></a>
                     </label>
                     <span class="error" th:if="${#fields.hasErrors('rulesAccepted')}"
                           th:errors="*{rulesAccepted}"></span>
