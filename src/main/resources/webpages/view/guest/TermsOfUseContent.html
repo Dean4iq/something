@@ -5,13 +5,13 @@
     <title>Terms of use</title>
 
     <style>
-        ol { counter-reset: item }
-        li{ display: block }
-        li:before { content: counters(item, ".") " "; counter-increment: item }
+        div.terms ol { counter-reset: item }
+        div.terms ol li { display: block }
+        div.terms ol li:before { content: counters(item, ".") " "; counter-increment: item }
     </style>
 </head>
 <body>
-<div th:fragment="terms">
+<div th:fragment="terms" class="terms">
     <ol>
         <li>Conditions</li>
         <ol>

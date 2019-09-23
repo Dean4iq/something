@@ -63,6 +63,17 @@
             border-radius:5px;
             box-shadow: 0px 0px 10px #000;
         }
+
+        div.terms ol {
+            counter-reset: item;
+        }
+        div.terms ol li {
+            display: block;
+        }
+        div.terms ol li:before {
+            content: counters(item, ".") " ";
+            counter-increment: item;
+        }
     </style>
     <script>
         $(document).ready(function(){

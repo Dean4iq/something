@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Privacy policy</title>
+
+    <style>
+        ol.terms { counter-reset: item }
+        ol.terms li { display: block }
+        ol.terms li:before { content: counters(item, ".") " "; counter-increment: item }
+    </style>
 </head>
 <body>
-<div th:fragment="terms">
-    <ol>
-
+<div th:fragment="terms" class="terms">
+    <ol style="terms">
+        <li>DSFDS</li>
+        <ol>
+            <li>|</li>
+        </ol>
     </ol>
 </div>
 </body>
