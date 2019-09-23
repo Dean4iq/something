@@ -182,7 +182,7 @@
 
 <div class="b-popup" id="terms_of_use">
     <div class="b-popup-content">
-        <h2 align="center"><span th:text="#{sign_up.form.agreements.terms_of_use}"></span></h2>
+        <h2 align="center"><span th:text="#{sign_up.popup.terms_of_use.header}"></span></h2>
         <div th:insert="guest/TermsOfUseContent.html :: terms"></div>
 
         <button class="btn btn-success" onclick="javascript:PopUpHide()">Accept</button>
@@ -191,7 +191,7 @@
 
 <div class="b-popup" id="privacy_policy">
     <div class="b-popup-content">
-        <h2 align="center"><span th:text="#{sign_up.form.agreements.privacy_policy}"></span></h2>
+        <h2 align="center"><span th:text="#{sign_up.popup.privacy_policy.header}"></span></h2>
         <div th:insert="guest/PrivacyPolicyContent.html :: terms"></div>
 
         <button class="btn btn-success" onclick="javascript:PopUpHide()">Accept</button>
