@@ -38,7 +38,44 @@
             color: red;
         }
 
+        .b-container{
+            width:200px;
+            height:150px;
+            background-color: #ccc;
+            margin:0px auto;
+            padding:10px;
+            font-size:30px;
+            color: #fff;
+        }
+        .b-popup{
+            width:100%;
+            min-height:100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow:hidden;
+            position:fixed;
+            top:0px;
+        }
+        .b-popup .b-popup-content{
+            margin:40px auto 0px auto;
+            width:100px;
+            height: 40px;
+            padding:10px;
+            background-color: #c5c5c5;
+            border-radius:5px;
+            box-shadow: 0px 0px 10px #000;
+        }
     </style>
+    <script>
+        $(document).ready(function(){
+            PopUpHide();
+        });
+        function PopUpShow(){
+            $("#popup1").show();
+        }
+        function PopUpHide(){
+            $("#popup1").hide();
+        }
+    </script>
 </head>
 <body>
 
@@ -115,9 +152,9 @@
                            th:field="*{rulesAccepted}" required/>
                     <label for="agreementAcceptance">
                         <span th:text="#{sign_up.form.rules}"></span>
-                        <a href="#" th:text="#{sign_up.form.agreements.terms_of_use}"></a>
+                        <a href="javascript:PopUpShow()" th:text="#{sign_up.form.agreements.terms_of_use}"></a>
                         <span th:text="#{sign_up.form.agreements.and}"></span>
-                        <a href="#" th:text="#{sign_up.form.agreements.privacy_policy}"></a>
+                        <a href="javascript:PopUpShow()" th:text="#{sign_up.form.agreements.privacy_policy}"></a>
                     </label>
                     <span class="error" th:if="${#fields.hasErrors('rulesAccepted')}"
                           th:errors="*{rulesAccepted}"></span>
@@ -128,5 +165,11 @@
         </div>
     </div>
 </form>
+<div class="b-popup" id="popup1">
+    <div class="b-popup-content">
+        Text in Popup
+        <a href="javascript:PopUpHide()">Hide popup</a>
+    </div>
+</div>
 </body>
 </html>
