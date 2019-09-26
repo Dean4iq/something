@@ -18,6 +18,23 @@
             background-size: cover;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/home-news',
+                dataType: 'json',
+                data: new Data(),
+                success: function(result) {
+                    alarm('haha');
+                },
+
+                error: function(result) {
+                    alert('Error has occurred. Try again later');
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>

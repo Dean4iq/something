@@ -2,10 +2,7 @@ package ua.den.controller;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.UserApplySupportDto;
@@ -25,12 +22,14 @@ public class AuthorizedController {
     }
 
     @GetMapping("home")
-    public ModelAndView getHomePage() {
-        ModelAndView modelAndView = new ModelAndView("/authorized/home");
+    public String getHomePage() {
+        return "/authorized/home";
+    }
 
-        modelAndView.addObject("newsList", getListOfNews(LocaleContextHolder.getLocale()));
-
-        return modelAndView;
+    @PostMapping(value = "home-news", produces = "application/json")
+    @ResponseBody
+    public List<NewsDto> getNewsForHomePage(@RequestParam("userDateTime") Date userDate) {
+        return getListOfNews(LocaleContextHolder.getLocale(), userDate);
     }
 
     @GetMapping("accessDenied")
@@ -48,7 +47,7 @@ public class AuthorizedController {
     }
 
     @RequestMapping(value = "support-output", produces = "application/json", method = RequestMethod.POST)
-    @ResponseBody()
+    @ResponseBody
     public Map<String, Object> manageSupportMessage(String name, String email, String subject, String text) {
         UserApplySupportDto userApplySupportDto = new UserApplySupportDto();
 
@@ -60,8 +59,8 @@ public class AuthorizedController {
         return validateFieldsAndGetStatusMap(userApplySupportDto);
     }
 
-    private List<NewsDto> getListOfNews(Locale locale) {
-        return new NewsXmlConverterService().getNewsFromXmlAndConvertToDto(locale.getLanguage(), new Date());
+    private List<NewsDto> getListOfNews(Locale locale, Date userDate) {
+        return new NewsXmlConverterService().getNewsFromXmlAndConvertToDto(locale.getLanguage(), userDate);
     }
 
     private List<String> getSubjectsList() {
