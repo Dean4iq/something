@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>About</title>
+    <title th:text="#{about.title}">About</title>
+
+    <link rel="shortcut icon" th:href="@{/public/img/ico/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div th:insert="parts/navbar.html :: bar"></div>
 
+<div>Things about web-site</div>
 </body>
 </html>

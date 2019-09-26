@@ -1,12 +1,15 @@
 package ua.den.controller;
 
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.UserApplySupportDto;
+import ua.den.model.service.NewsXmlConverterService;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
@@ -22,8 +25,12 @@ public class AuthorizedController {
     }
 
     @GetMapping("home")
-    public String getHomePage() {
-        return "/authorized/home";
+    public ModelAndView getHomePage() {
+        ModelAndView modelAndView = new ModelAndView("/authorized/home");
+
+        modelAndView.addObject("newsList", getListOfNews(LocaleContextHolder.getLocale()));
+
+        return modelAndView;
     }
 
     @GetMapping("accessDenied")
@@ -51,6 +58,10 @@ public class AuthorizedController {
         userApplySupportDto.setText(text);
 
         return validateFieldsAndGetStatusMap(userApplySupportDto);
+    }
+
+    private List<NewsDto> getListOfNews(Locale locale) {
+        return new NewsXmlConverterService().getNewsFromXmlAndConvertToDto(locale.getLanguage(), new Date());
     }
 
     private List<String> getSubjectsList() {

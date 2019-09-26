@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="https://den-edu.herokuapp.com/">
+    <element name="news">
+        <complexType>
+            <sequence>
+                <element name="article" maxOccurs="unbounded" minOccurs="0">
+                    <complexType>
+                        <sequence>
+                            <element name="header" type="string"/>
+                            <element name="description" type="string"/>
+                            <element name="text" type="string"/>
+                            <element name="to_be_displayed" type="dateTime" minOccurs="0"/>
+                            <element name="published" type="dateTime"/>
+                        </sequence>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+</schema>
