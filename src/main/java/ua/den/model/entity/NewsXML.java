@@ -36,6 +36,9 @@ public class NewsXML implements Serializable {
     }
 
     private boolean isNewsDisplayable(Date date) {
+        System.out.println(date);
+        System.out.println(date.toString());
+        System.out.println(new Date().toString());
         return date.compareTo(toBeDisplayed) > 0;
     }
 
