@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.NewsDto;
+import ua.den.model.dto.NewsInputDataDto;
 import ua.den.model.dto.UserApplySupportDto;
 import ua.den.model.enums.AuthorityType;
 import ua.den.model.service.NewsXmlConverterService;
@@ -41,7 +42,7 @@ public class AuthorizedController {
 
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains("ROLE_ADMIN")
         || SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(AuthorityType.ROLE_ADMIN)) {
-            modelAndView.addObject("newsData", new Object());
+            modelAndView.addObject("newsData", new NewsInputDataDto());
         }
 
         return modelAndView;
