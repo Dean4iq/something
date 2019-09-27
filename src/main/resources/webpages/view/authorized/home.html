@@ -37,6 +37,10 @@
             </div>
             <div class="card-footer bg-transparent border-dark">
                 <h6 class="card-subtitle mb-2 text-muted" align="right" th:text="${news.published}"></h6>
+                <h6 class="card-subtitle mb-2 text-muted" align="right" th:text="${#dates.format(news.published)}"></h6>
+                <h6 class="card-subtitle mb-2 text-muted" align="right" th:text="${#dates.formatISO(news.published)}"></h6>
+                <h6 class="card-subtitle mb-2 text-muted" align="right" th:text="${#dates.format(news.published, 'dd/MMM/yyyy HH:mm:ss')}"></h6>
+
             </div>
         </div>
     </div>
