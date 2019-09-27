@@ -2,6 +2,7 @@ package ua.den.model.dto;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.sql.Date;
 
 public class NewsInputDataDto implements Serializable {
     @NotEmpty(message = "field.blank")
@@ -15,7 +16,8 @@ public class NewsInputDataDto implements Serializable {
     @NotEmpty(message = "field.blank")
     private String descriptionUa;
     @NotEmpty(message = "field.blank")
-    private String textUA;
+    private String textUa;
+    private Date toBeDisplayedDate;
 
     public String getHeaderEn() {
         return headerEn;
@@ -57,11 +59,19 @@ public class NewsInputDataDto implements Serializable {
         this.descriptionUa = descriptionUa;
     }
 
-    public String getTextUA() {
-        return textUA;
+    public String getTextUa() {
+        return textUa;
     }
 
-    public void setTextUA(String textUA) {
-        this.textUA = textUA;
+    public void setTextUa(String textUa) {
+        this.textUa = textUa;
+    }
+
+    public Date getToBeDisplayedDate() {
+        return toBeDisplayedDate;
+    }
+
+    public void setToBeDisplayedDate(Date toBeDisplayedDate) {
+        this.toBeDisplayedDate = toBeDisplayedDate;
     }
 }

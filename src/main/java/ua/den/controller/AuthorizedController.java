@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.xml.sax.SAXException;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.NewsInputDataDto;
 import ua.den.model.dto.UserApplySupportDto;
@@ -16,8 +15,11 @@ import ua.den.model.service.NewsXmlConverterService;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -43,6 +45,18 @@ public class AuthorizedController {
         }
 
         return modelAndView;
+    }
+
+    @PostMapping("home")
+    public String processNewNews(@ModelAttribute("newsData") @Valid NewsInputDataDto newsData,
+                                 BindingResult bindingResult) {
+        try {
+            newsXmlConverterService.addNewNewsDataToXml(newsData, new Date());
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+
+        return "/authorized/home";
     }
 
     @GetMapping("accessDenied")
