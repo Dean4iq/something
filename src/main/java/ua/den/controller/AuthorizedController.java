@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.NewsInputDataDto;
 import ua.den.model.dto.UserApplySupportDto;
-import ua.den.model.enums.AuthorityType;
 import ua.den.model.service.NewsXmlConverterService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,11 +37,8 @@ public class AuthorizedController {
 
         modelAndView.addObject("newsLines", getListOfNews(LocaleContextHolder.getLocale(), new Date()));
 
-        SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(e->System.out.println(e.getClass()));
-
-        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains("ROLE_ADMIN")
-        || SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(AuthorityType.ROLE_ADMIN)) {
-            System.out.println("C'mon");
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(auth -> (auth.getAuthority().equals("ROLE_ADMIN")))) {
             modelAndView.addObject("newsData", new NewsInputDataDto());
         }
 
