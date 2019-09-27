@@ -36,6 +36,8 @@ public class AuthorizedController {
 
         modelAndView.addObject("newsLines", getListOfNews(LocaleContextHolder.getLocale(), new Date()));
 
+        SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(System.out::println);
+
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains("ROLE_ADMIN")) {
             modelAndView.addObject("newsData", new Object());
         }
