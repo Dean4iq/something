@@ -18,23 +18,6 @@
             background-size: cover;
         }
     </style>
-    <script>
-        $(document).ready(function() {
-            $.ajax({
-                type: 'POST',
-                url: '/home-news',
-                dataType: 'json',
-                data: {userDateTime : new Date()},
-                success: function(result) {
-                    alarm('haha');
-                },
-
-                error: function(result) {
-                    alert('Error has occurred. Try again later');
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
@@ -43,7 +26,7 @@
     <h1 align="center" th:text="#{home.text.welcome}">Welcome aboard!</h1>
     <div>NEWS</div>
     <div>
-        <div th:each="news: ${newsList}">
+        <div th:each="news: ${newsLines}" th:if="${news.displayable}">
             <h3 th:text="${news.header}"></h3>
             <h5 th:text="${news.description}"></h5>
             <p th:text="${news.text}"></p>

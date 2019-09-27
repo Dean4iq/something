@@ -22,8 +22,12 @@ public class AuthorizedController {
     }
 
     @GetMapping("home")
-    public String getHomePage() {
-        return "/authorized/home";
+    public ModelAndView getHomePage() {
+        ModelAndView modelAndView = new ModelAndView("/authorized/home");
+
+        modelAndView.addObject("newsLines", getListOfNews(LocaleContextHolder.getLocale(), new Date()));
+
+        return modelAndView;
     }
 
     @PostMapping(value = "home-news", produces = "application/json")
