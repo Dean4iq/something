@@ -42,6 +42,7 @@ public class AuthorizedController {
 
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains("ROLE_ADMIN")
         || SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(AuthorityType.ROLE_ADMIN)) {
+            System.out.println("C'mon");
             modelAndView.addObject("newsData", new NewsInputDataDto());
         }
 
