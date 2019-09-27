@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.UserApplySupportDto;
+import ua.den.model.enums.AuthorityType;
 import ua.den.model.service.NewsXmlConverterService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,8 @@ public class AuthorizedController {
 
         SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(System.out::println);
 
-        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains("ROLE_ADMIN")) {
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains("ROLE_ADMIN")
+        || SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(AuthorityType.ROLE_ADMIN)) {
             modelAndView.addObject("newsData", new Object());
         }
 
