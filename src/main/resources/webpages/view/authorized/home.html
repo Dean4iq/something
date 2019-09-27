@@ -17,6 +17,9 @@
             background-repeat: repeat;
             background-size: cover;
         }
+        span.error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -37,10 +40,80 @@
             </div>
             <div class="card-footer bg-transparent border-dark">
                 <h6 class="card-subtitle mb-2 text-muted" align="right" th:text="${#dates.format(news.published, 'EEEE, dd MMMM yyyy, HH:mm z')}"></h6>
-
             </div>
         </div>
     </div>
+</div>
+
+<div sec:authorize="hasAuthority('ROLE_ADMIN')" class="container">
+    <form th:object="${newsData}">
+        <h2>Create news</h2>
+        <p><strong>Note:</strong> The news should be published both with <strong>English</strong> and <strong>Ukrainian</strong> languages.</p>
+        <p><strong>Note:</strong> <strong>HTML</strong> marking can be used.</p>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEN">News in English</a>
+                    </h4>
+                </div>
+                <div id="collapseEN" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="header_en">Header</label>
+                            <input id="header_en" class="form-control" type="text" name="headerEn" th:field="*{headerEn}" required/>
+                            <span class="error" th:if="${#fields.hasErrors('headerEn')}"
+                                  th:errors="*{headerEn}"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="description_en">Short description</label>
+                            <input id="description_en" class="form-control" type="text" name="descriptionEn" th:field="*{descriptionEn}" required/>
+                            <span class="error" th:if="${#fields.hasErrors('descriptionEn')}"
+                                  th:errors="*{descriptionEn}"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="text_inp_en">News text</label>
+                            <textarea id="text_inp_en" class="form-control" style="resize: vertical;" name="textEn" th:field="*{textEn}" required></textarea>
+                            <span class="error" th:if="${#fields.hasErrors('textEn')}"
+                                  th:errors="*{textEn}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseUA">Новини українською</a>
+                    </h4>
+                </div>
+                <div id="collapseUA" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="header_ua">Заголовок</label>
+                            <input id="header_ua" class="form-control" type="text" name="headerUa" th:field="*{headerUa}" required/>
+                            <span class="error" th:if="${#fields.hasErrors('headerUa')}"
+                                  th:errors="*{headerUa}"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="description_ua">Короткий опис</label>
+                            <input id="description_ua" class="form-control" type="text" name="descriptionUa" th:field="*{descriptionUa}" required/>
+                            <span class="error" th:if="${#fields.hasErrors('descriptionUa')}"
+                                  th:errors="*{descriptionUa}"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="text_inp_ua">Текст новини</label>
+                            <textarea id="text_inp_ua" class="form-control" style="resize: vertical;" name="textUa" th:field="*{textUa}" required></textarea>
+                            <span class="error" th:if="${#fields.hasErrors('textUa')}"
+                                  th:errors="*{textUa}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 </body>
 </html>

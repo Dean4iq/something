@@ -3,7 +3,7 @@ package ua.den.model.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class NewsDto implements Serializable {
+public class NewsDto implements Serializable, Comparable<NewsDto> {
     private String header;
     private String description;
     private String text;
@@ -59,5 +59,10 @@ public class NewsDto implements Serializable {
                 ", displayable=" + displayable +
                 ", published=" + published +
                 '}';
+    }
+
+    @Override
+    public int compareTo(NewsDto newsDto) {
+        return this.getPublished().compareTo(newsDto.getPublished());
     }
 }

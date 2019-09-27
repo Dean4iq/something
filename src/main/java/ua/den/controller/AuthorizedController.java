@@ -1,8 +1,13 @@
 package ua.den.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.UserApplySupportDto;
@@ -12,28 +17,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.security.Principal;
 import java.util.*;
 
 @Controller
 public class AuthorizedController {
+    @Autowired
+    private NewsXmlConverterService newsXmlConverterService;
+
     @RequestMapping("login_success")
     public String redirectToHome() {
         return "redirect:/home";
     }
 
     @GetMapping("home")
-    public ModelAndView getHomePage() {
+    public ModelAndView getHomePage(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("/authorized/home");
 
         modelAndView.addObject("newsLines", getListOfNews(LocaleContextHolder.getLocale(), new Date()));
 
-        return modelAndView;
-    }
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains("ROLE_ADMIN")) {
+            modelAndView.addObject("newsData", new Object());
+        }
 
-    @PostMapping(value = "home-news", produces = "application/json")
-    @ResponseBody
-    public List<NewsDto> getNewsForHomePage(@RequestParam("userDateTime") Date userDate) {
-        return getListOfNews(LocaleContextHolder.getLocale(), userDate);
+        return modelAndView;
     }
 
     @GetMapping("accessDenied")
@@ -64,7 +71,8 @@ public class AuthorizedController {
     }
 
     private List<NewsDto> getListOfNews(Locale locale, Date userDate) {
-        return new NewsXmlConverterService().getNewsFromXmlAndConvertToDto(locale.getLanguage(), userDate);
+        List<NewsDto> newsList = newsXmlConverterService.getNewsFromXmlAndConvertToDto(locale.getLanguage(), userDate);
+        return newsXmlConverterService.sortNewsByPublishDate(newsList);
     }
 
     private List<String> getSubjectsList() {

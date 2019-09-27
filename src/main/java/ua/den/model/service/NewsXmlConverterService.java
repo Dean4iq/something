@@ -1,5 +1,6 @@
 package ua.den.model.service;
 
+import org.springframework.stereotype.Service;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.entity.NewsXML;
 import ua.den.model.entity.NewsXmlWrapper;
@@ -14,11 +15,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class NewsXmlConverterService {
     public List<NewsDto> getNewsFromXmlAndConvertToDto(String language, Date date) {
         List<NewsXML> newsXMLs = receiveNewsXmlWrapper(language).getNewsXML();
 
         return mapToDtoAndLimitByDisplayableDate(newsXMLs, date);
+    }
+
+    public List<NewsDto> sortNewsByPublishDate(List<NewsDto> newsList) {
+        return newsList.stream().sorted().collect(Collectors.toList());
     }
 
     private NewsXmlWrapper receiveNewsXmlWrapper(String language) {
