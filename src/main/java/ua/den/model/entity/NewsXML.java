@@ -7,8 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.util.Date;
+import java.time.ZoneOffset;
 
 @XmlRootElement(name = "article")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -20,9 +21,9 @@ public class NewsXML implements Serializable {
     @XmlElement(name = "text")
     private String text;
     @XmlElement(name = "to_be_displayed")
-    private OffsetDateTime toBeDisplayed;
+    private LocalDateTime toBeDisplayed;
     @XmlElement(name = "published")
-    private OffsetDateTime published;
+    private LocalDateTime published;
 
     public NewsDto convertToDto(OffsetDateTime date) {
         NewsDto dto = new NewsDto();
@@ -31,13 +32,13 @@ public class NewsXML implements Serializable {
         dto.setDescription(this.description);
         dto.setText(this.text);
         dto.setDisplayable(isNewsDisplayable(date));
-        dto.setPublished(this.published);
+        dto.setPublished(OffsetDateTime.of(published, ZoneOffset.UTC));
 
         return dto;
     }
 
     private boolean isNewsDisplayable(OffsetDateTime date) {
-        return (toBeDisplayed == null) || (date.compareTo(toBeDisplayed) > 0);
+        return (toBeDisplayed == null) || (date.compareTo(OffsetDateTime.of(toBeDisplayed, ZoneOffset.UTC)) > 0);
     }
 
     public String getHeader() {
@@ -64,19 +65,19 @@ public class NewsXML implements Serializable {
         this.text = text;
     }
 
-    public OffsetDateTime getToBeDisplayed() {
+    public LocalDateTime getToBeDisplayed() {
         return toBeDisplayed;
     }
 
-    public void setToBeDisplayed(OffsetDateTime toBeDisplayed) {
+    public void setToBeDisplayed(LocalDateTime toBeDisplayed) {
         this.toBeDisplayed = toBeDisplayed;
     }
 
-    public OffsetDateTime getPublished() {
+    public LocalDateTime getPublished() {
         return published;
     }
 
-    public void setPublished(OffsetDateTime published) {
+    public void setPublished(LocalDateTime published) {
         this.published = published;
     }
 }
