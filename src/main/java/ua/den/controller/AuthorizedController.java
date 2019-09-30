@@ -54,7 +54,7 @@ public class AuthorizedController {
 
         newsXmlConverterService.addNewNewsDataToXml(newsData, currentDateTime);
 
-        return "redirect:/authorized/home";
+        return "redirect:/home";
     }
 
     @GetMapping("accessDenied")
