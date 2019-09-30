@@ -28,7 +28,6 @@ public class NewsXmlConverterService {
     }
 
     public void addNewNewsDataToXml(NewsInputDataDto newsData, OffsetDateTime currentDateTime) {
-        System.out.println(newsData);
         try {
             JAXBContext jContext = JAXBContext.newInstance(NewsXmlWrapper.class);
             Marshaller marshallObj = jContext.createMarshaller();

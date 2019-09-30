@@ -21,6 +21,9 @@
             color: red;
         }
     </style>
+    <script>
+        $('#datetimeInp').inputmask("datetime");
+    </script>
 </head>
 <body>
 <div th:insert="parts/navbar.html :: bar"></div>
@@ -108,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <input type="datetime-local" class="form-control" th:field="*{toBeDisplayedDate}" name="toBeDisplayedDate" placeholder="2017-05-30 10:20:30"/>
+            <input type="datetime-local" id="datetimeInp" class="form-control" th:field="*{toBeDisplayedDate}" name="toBeDisplayedDate" placeholder="2017-05-30 10:20:30"/>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
