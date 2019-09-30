@@ -74,4 +74,17 @@ public class NewsInputDataDto implements Serializable {
     public void setToBeDisplayedDate(OffsetDateTime toBeDisplayedDate) {
         this.toBeDisplayedDate = toBeDisplayedDate;
     }
+
+    @Override
+    public String toString() {
+        return "NewsInputDataDto{" +
+                "headerEn='" + headerEn + '\'' +
+                ", descriptionEn='" + descriptionEn + '\'' +
+                ", textEn='" + textEn + '\'' +
+                ", headerUa='" + headerUa + '\'' +
+                ", descriptionUa='" + descriptionUa + '\'' +
+                ", textUa='" + textUa + '\'' +
+                ", toBeDisplayedDate=" + toBeDisplayedDate +
+                '}';
+    }
 }
