@@ -22,7 +22,13 @@
         }
     </style>
     <script>
-        $('#datetimeInp').inputmask("datetime");
+        $('#datetimeInp').inputmask("datetime",{
+            mask: "1-2-y h:s",
+            placeholder: "dd-mm-yyyy hh:mm",
+            leapday: "-29-02",
+            separator: "-",
+            alias: "dd-mm-yyyy"
+          });
     </script>
 </head>
 <body>
