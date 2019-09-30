@@ -1,10 +1,6 @@
 package ua.den.model.service;
 
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.NewsInputDataDto;
 import ua.den.model.entity.NewsXML;
@@ -14,54 +10,52 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class NewsXmlConverterService {
-    public List<NewsDto> getNewsFromXmlAndConvertToDto(String language, Date date) {
+    public List<NewsDto> getNewsFromXmlAndConvertToDto(String language, OffsetDateTime date) {
         List<NewsXML> newsXMLs = receiveNewsXmlWrapper(language).getNewsXML();
 
         return mapToDtoAndLimitByDisplayableDate(newsXMLs, date);
     }
 
-    public void addNewNewsDataToXml(NewsInputDataDto newsData, Date date) throws ParserConfigurationException, IOException, SAXException {
-        try{
+    public void addNewNewsDataToXml(NewsInputDataDto newsData, OffsetDateTime currentDateTime) {
+        try {
             JAXBContext jContext = JAXBContext.newInstance(NewsXmlWrapper.class);
             Marshaller marshallObj = jContext.createMarshaller();
-            marshallObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshallObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-            NewsXmlWrapper newsXmlWrapperUa = new NewsXmlWrapper();
+            NewsXmlWrapper newsElementsUA = receiveNewsXmlWrapper("uk");
+            NewsXmlWrapper newsElementsEN = receiveNewsXmlWrapper("en");
+
             NewsXML newsXMLUa = new NewsXML();
-            newsXmlWrapperUa.setNewsXML(Collections.singletonList(newsXMLUa));
+            newsElementsUA.getNewsXML().add(newsXMLUa);
+
             newsXMLUa.setHeader(newsData.getHeaderUa());
             newsXMLUa.setDescription(newsData.getDescriptionUa());
             newsXMLUa.setText(newsData.getTextUa());
             newsXMLUa.setToBeDisplayed(newsData.getToBeDisplayedDate());
-            newsXMLUa.setPublished(date);
+            newsXMLUa.setPublished(currentDateTime);
 
-            NewsXmlWrapper newsXmlWrapperEn = new NewsXmlWrapper();
             NewsXML newsXMLEn = new NewsXML();
-            newsXmlWrapperEn.setNewsXML(Collections.singletonList(newsXMLEn));
+            newsElementsEN.getNewsXML().add(newsXMLEn);
+
             newsXMLEn.setHeader(newsData.getHeaderEn());
             newsXMLEn.setDescription(newsData.getDescriptionEn());
             newsXMLEn.setText(newsData.getTextEn());
             newsXMLEn.setToBeDisplayed(newsData.getToBeDisplayedDate());
-            newsXMLEn.setPublished(date);
+            newsXMLEn.setPublished(currentDateTime);
 
-            marshallObj.marshal(newsXmlWrapperUa, new FileOutputStream("src/main/resources/news/news_uk.xml"));
-            marshallObj.marshal(newsXmlWrapperEn, new FileOutputStream("src/main/resources/news/news_en.xml"));
-        } catch(Exception e) {
+            marshallObj.marshal(newsElementsUA, new FileOutputStream("src/main/resources/news/news_uk.xml"));
+            marshallObj.marshal(newsElementsEN, new FileOutputStream("src/main/resources/news/news_en.xml"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -86,7 +80,7 @@ public class NewsXmlConverterService {
         return new NewsXmlWrapper();
     }
 
-    private List<NewsDto> mapToDtoAndLimitByDisplayableDate(List<NewsXML> newsXMLs, Date date) {
+    private List<NewsDto> mapToDtoAndLimitByDisplayableDate(List<NewsXML> newsXMLs, OffsetDateTime date) {
         return newsXMLs.stream()
                 .map(elem -> elem.convertToDto(date))
                 .filter(NewsDto::isDisplayable)

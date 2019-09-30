@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.xml.sax.SAXException;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.NewsInputDataDto;
 import ua.den.model.dto.UserApplySupportDto;
@@ -18,9 +17,9 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.security.Principal;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 
 @Controller
@@ -37,7 +36,8 @@ public class AuthorizedController {
     public ModelAndView getHomePage(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("/authorized/home");
 
-        modelAndView.addObject("newsLines", getListOfNews(LocaleContextHolder.getLocale(), new Date()));
+        OffsetDateTime currentDateTime = OffsetDateTime.now(ZoneOffset.UTC).withNano(0);
+        modelAndView.addObject("newsLines", getListOfNews(LocaleContextHolder.getLocale(), currentDateTime));
 
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .anyMatch(auth -> (auth.getAuthority().equals("ROLE_ADMIN")))) {
@@ -50,13 +50,11 @@ public class AuthorizedController {
     @PostMapping("home")
     public String processNewNews(@ModelAttribute("newsData") @Valid NewsInputDataDto newsData,
                                  BindingResult bindingResult) {
-        try {
-            newsXmlConverterService.addNewNewsDataToXml(newsData, new Date());
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
-        }
+        OffsetDateTime currentDateTime = OffsetDateTime.now(ZoneOffset.UTC).withNano(0);
 
-        return "/authorized/home";
+        newsXmlConverterService.addNewNewsDataToXml(newsData, currentDateTime);
+
+        return "redirect:/authorized/home";
     }
 
     @GetMapping("accessDenied")
@@ -86,7 +84,7 @@ public class AuthorizedController {
         return validateFieldsAndGetStatusMap(userApplySupportDto);
     }
 
-    private List<NewsDto> getListOfNews(Locale locale, Date userDate) {
+    private List<NewsDto> getListOfNews(Locale locale, OffsetDateTime userDate) {
         List<NewsDto> newsList = newsXmlConverterService.getNewsFromXmlAndConvertToDto(locale.getLanguage(), userDate);
         return newsXmlConverterService.sortNewsByPublishDate(newsList);
     }

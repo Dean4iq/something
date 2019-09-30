@@ -1,14 +1,14 @@
 package ua.den.model.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 public class NewsDto implements Serializable, Comparable<NewsDto> {
     private String header;
     private String description;
     private String text;
     private boolean displayable;
-    private Date published;
+    private OffsetDateTime published;
 
     public String getHeader() {
         return header;
@@ -42,11 +42,11 @@ public class NewsDto implements Serializable, Comparable<NewsDto> {
         this.displayable = displayable;
     }
 
-    public Date getPublished() {
+    public OffsetDateTime getPublished() {
         return published;
     }
 
-    public void setPublished(Date published) {
+    public void setPublished(OffsetDateTime published) {
         this.published = published;
     }
 

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @XmlRootElement(name = "article")
@@ -19,11 +20,11 @@ public class NewsXML implements Serializable {
     @XmlElement(name = "text")
     private String text;
     @XmlElement(name = "to_be_displayed")
-    private Date toBeDisplayed;
+    private OffsetDateTime toBeDisplayed;
     @XmlElement(name = "published")
-    private Date published;
+    private OffsetDateTime published;
 
-    public NewsDto convertToDto(Date date) {
+    public NewsDto convertToDto(OffsetDateTime date) {
         NewsDto dto = new NewsDto();
 
         dto.setHeader(this.header);
@@ -35,7 +36,7 @@ public class NewsXML implements Serializable {
         return dto;
     }
 
-    private boolean isNewsDisplayable(Date date) {
+    private boolean isNewsDisplayable(OffsetDateTime date) {
         return (toBeDisplayed == null) || (date.compareTo(toBeDisplayed) > 0);
     }
 
@@ -63,19 +64,19 @@ public class NewsXML implements Serializable {
         this.text = text;
     }
 
-    public Date getToBeDisplayed() {
+    public OffsetDateTime getToBeDisplayed() {
         return toBeDisplayed;
     }
 
-    public void setToBeDisplayed(Date toBeDisplayed) {
+    public void setToBeDisplayed(OffsetDateTime toBeDisplayed) {
         this.toBeDisplayed = toBeDisplayed;
     }
 
-    public Date getPublished() {
+    public OffsetDateTime getPublished() {
         return published;
     }
 
-    public void setPublished(Date published) {
+    public void setPublished(OffsetDateTime published) {
         this.published = published;
     }
 }

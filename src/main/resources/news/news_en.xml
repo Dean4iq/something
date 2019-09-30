@@ -1,24 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<news:news xmlns:news="https://den-edu.herokuapp.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://den-edu.herokuapp.com/ news.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:news xmlns:ns2="https://den-edu.herokuapp.com/">
     <article>
         <header>NOT DISPLAYABLE</header>
         <description>Ukrainian text processing is available now!</description>
         <text>From September 22nd 2019 users can process Ukrainian texts within service</text>
-        <to_be_displayed>2020-09-22T09:00:00</to_be_displayed>
-        <published>2020-09-21T10:00:00</published>
+        <to_be_displayed>2020-09-22T09:00:00Z</to_be_displayed>
+        <published>2020-09-21T10:00:00Z</published>
     </article>
     <article>
         <header>Service updates</header>
         <description>Ukrainian text processing is available now!</description>
         <text>From September 22nd 2019 users can process Ukrainian texts within service</text>
-        <to_be_displayed>2019-09-22T09:00:00</to_be_displayed>
-        <published>2019-09-21T10:00:00</published>
+        <to_be_displayed>2019-09-22T09:00:00Z</to_be_displayed>
+        <published>2019-09-21T10:00:00Z</published>
     </article>
     <article>
         <header>Maintenance</header>
         <description>Maintenance at March 1st (9.00am - 11.00am)</description>
         <text>March 1st, 2019 from 9.00am to 11.00am service will be unavailable due to maintenance works</text>
-        <published>2019-02-28T12:33:11</published>
+        <published>2019-02-28T12:33:11Z</published>
     </article>
-</news:news>
+</ns2:news>

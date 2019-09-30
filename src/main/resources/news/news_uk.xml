@@ -1,24 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<news:news xmlns:news="https://den-edu.herokuapp.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="https://den-edu.herokuapp.com/ news.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:news xmlns:ns2="https://den-edu.herokuapp.com/">
     <article>
         <header>NOT DISPLAYABLE</header>
         <description>Ukrainian text processing is available now!</description>
         <text>From September 22nd 2019 users can process Ukrainian texts within service</text>
-        <to_be_displayed>2020-09-22T09:00:00</to_be_displayed>
-        <published>2019-09-21T10:00:00</published>
+        <to_be_displayed>2020-09-22T09:00:00Z</to_be_displayed>
+        <published>2019-09-21T10:00:00Z</published>
     </article>
     <article>
         <header>Оновлення сервісу</header>
         <description>Можливість використання сервісу для українських слів</description>
         <text>З 22 вересня на сервері з'явилася можливість використання сервісу з українськими текстами</text>
-        <to_be_displayed>2019-09-22T09:00:00</to_be_displayed>
-        <published>2019-09-21T10:00:00</published>
+        <to_be_displayed>2019-09-22T09:00:00Z</to_be_displayed>
+        <published>2019-09-21T10:00:00Z</published>
     </article>
     <article>
         <header>Технічні роботи</header>
         <description>Проведення робіт 1 березня 2019 (09:00 - 11:00)</description>
         <text>1 березня 2019 з 9 до 11 ранку будуть проводитися технічні роботи, у зв'язку з чим сервіс буде недоступним</text>
-        <published>2019-02-28T12:33:11</published>
+        <published>2019-02-28T12:33:11Z</published>
     </article>
-</news:news>
+</ns2:news>
