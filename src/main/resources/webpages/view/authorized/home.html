@@ -39,7 +39,7 @@
                 <p class="card-text" th:text="${news.text}"></p>
             </div>
             <div class="card-footer bg-transparent border-dark">
-                <h6 class="card-subtitle mb-2 text-muted" align="right" th:text="${#temporals.format(news.published, 'EEEE, dd MMMM yyyy, HH:mm z')}"></h6>
+                <h6 class="card-subtitle mb-2 text-muted" align="right" th:text="${#dates.format(news.published, 'EEEE, dd MMMM yyyy, HH:mm z')}"></h6>
             </div>
         </div>
     </div>

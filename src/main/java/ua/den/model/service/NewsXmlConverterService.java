@@ -14,6 +14,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Date;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,8 +42,8 @@ public class NewsXmlConverterService {
             newsXMLUa.setHeader(newsData.getHeaderUa());
             newsXMLUa.setDescription(newsData.getDescriptionUa());
             newsXMLUa.setText(newsData.getTextUa());
-            newsXMLUa.setToBeDisplayed(newsData.getToBeDisplayedDate().toLocalDateTime());
-            newsXMLUa.setPublished(currentDateTime.toLocalDateTime());
+            newsXMLUa.setToBeDisplayed(Date.from(newsData.getToBeDisplayedDate().toInstant()));
+            newsXMLUa.setPublished(Date.from(currentDateTime.toInstant()));
 
             NewsXML newsXMLEn = new NewsXML();
             newsElementsEN.getNewsXML().add(newsXMLEn);
@@ -50,8 +51,8 @@ public class NewsXmlConverterService {
             newsXMLEn.setHeader(newsData.getHeaderEn());
             newsXMLEn.setDescription(newsData.getDescriptionEn());
             newsXMLEn.setText(newsData.getTextEn());
-            newsXMLEn.setToBeDisplayed(newsData.getToBeDisplayedDate().toLocalDateTime());
-            newsXMLEn.setPublished(currentDateTime.toLocalDateTime());
+            newsXMLEn.setToBeDisplayed(Date.from(newsData.getToBeDisplayedDate().toInstant()));
+            newsXMLEn.setPublished(Date.from(currentDateTime.toInstant()));
 
             marshallObj.marshal(newsElementsUA, new FileOutputStream("src/main/resources/news/news_uk.xml"));
             marshallObj.marshal(newsElementsEN, new FileOutputStream("src/main/resources/news/news_en.xml"));
