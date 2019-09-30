@@ -3,6 +3,7 @@ package ua.den.model.dto;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class NewsInputDataDto implements Serializable {
     @NotEmpty(message = "field.blank")
@@ -17,7 +18,11 @@ public class NewsInputDataDto implements Serializable {
     private String descriptionUa;
     @NotEmpty(message = "field.blank")
     private String textUa;
-    private OffsetDateTime toBeDisplayedDate;
+    private String toBeDisplayedDate;
+
+    public OffsetDateTime convertToBeDisplayedDateTime() {
+        return OffsetDateTime.parse(toBeDisplayedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 
     public String getHeaderEn() {
         return headerEn;
@@ -67,11 +72,11 @@ public class NewsInputDataDto implements Serializable {
         this.textUa = textUa;
     }
 
-    public OffsetDateTime getToBeDisplayedDate() {
+    public String getToBeDisplayedDate() {
         return toBeDisplayedDate;
     }
 
-    public void setToBeDisplayedDate(OffsetDateTime toBeDisplayedDate) {
+    public void setToBeDisplayedDate(String toBeDisplayedDate) {
         this.toBeDisplayedDate = toBeDisplayedDate;
     }
 

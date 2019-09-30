@@ -43,7 +43,7 @@ public class NewsXmlConverterService {
             newsXMLUa.setHeader(newsData.getHeaderUa());
             newsXMLUa.setDescription(newsData.getDescriptionUa());
             newsXMLUa.setText(newsData.getTextUa());
-            newsXMLUa.setToBeDisplayed(Date.from(newsData.getToBeDisplayedDate().toInstant()));
+            newsXMLUa.setToBeDisplayed(Date.from(newsData.convertToBeDisplayedDateTime().toInstant()));
             newsXMLUa.setPublished(Date.from(currentDateTime.toInstant()));
 
             NewsXML newsXMLEn = new NewsXML();
@@ -52,7 +52,7 @@ public class NewsXmlConverterService {
             newsXMLEn.setHeader(newsData.getHeaderEn());
             newsXMLEn.setDescription(newsData.getDescriptionEn());
             newsXMLEn.setText(newsData.getTextEn());
-            newsXMLEn.setToBeDisplayed(Date.from(newsData.getToBeDisplayedDate().toInstant()));
+            newsXMLEn.setToBeDisplayed(Date.from(newsData.convertToBeDisplayedDateTime().toInstant()));
             newsXMLEn.setPublished(Date.from(currentDateTime.toInstant()));
 
             marshallObj.marshal(newsElementsUA, new FileOutputStream("src/main/resources/news/news_uk.xml"));
