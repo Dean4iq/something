@@ -25,10 +25,10 @@
     <script>
         $(document).ready(function($){
             $("#datetimeInp").inputmask("datetime",{
-                mask: "1-2-y h:m:s",
                 placeholder: "dd-MM-yyyy HH:mm:ss",
                 leapday: "-02-29",
                 separator: "-",
+                hourformat: 24,
                 alias: "dd-MM-yyyy"
               });
           })(jQuery)
