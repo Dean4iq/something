@@ -7,6 +7,7 @@
     <link rel="shortcut icon" th:href="@{/public/img/ico/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 
     <style>
@@ -22,13 +23,15 @@
         }
     </style>
     <script>
-        $('#datetimeInp').inputmask("datetime",{
-            mask: "1-2-y h:s",
-            placeholder: "dd-mm-yyyy hh:mm",
-            leapday: "-29-02",
-            separator: "-",
-            alias: "dd-mm-yyyy"
-          });
+        (function($){
+            $('#datetimeInp').inputmask("datetime",{
+                mask: "1-2-y h:s",
+                placeholder: "dd-mm-yyyy hh:mm",
+                leapday: "-02-29",
+                separator: "-",
+                alias: "dd-mm-yyyy"
+              });
+          })(jQuery)
     </script>
 </head>
 <body>
