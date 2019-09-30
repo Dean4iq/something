@@ -21,7 +21,7 @@ public class NewsInputDataDto implements Serializable {
     private String toBeDisplayedDate;
 
     public OffsetDateTime convertToBeDisplayedDateTime() {
-        return OffsetDateTime.parse(toBeDisplayedDate + " +0000", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z"));
+        return OffsetDateTime.parse(toBeDisplayedDate + " +0000", DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss Z"));
     }
 
     public String getHeaderEn() {
