@@ -38,7 +38,7 @@
 
         <div class="form-group">
             <label for="birthField" th:text="#{user.settings.field.birth_date}">Birth date:</label>
-            <p class="form-control" id="birthField" th:text="${#temporals.format(userData.birthDate,'dd.MM.yyyy')}"
+            <p class="form-control" id="birthField" th:text="${#temporals.format(userData.birthDate, 'dd MMMM yyyy')}"
                style="display: inline;"></p>
         </div>
         <button type="submit" class="btn btn-primary" th:text="#{user.settings.button.submit.data}">Update data</button>
