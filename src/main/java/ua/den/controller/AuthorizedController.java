@@ -62,6 +62,11 @@ public class AuthorizedController {
         return "authorized/access_denied";
     }
 
+    @GetMapping("about")
+    public String getAboutPage() {
+        return "authorized/about";
+    }
+
     @GetMapping("support")
     public ModelAndView getSupportPage() {
         ModelAndView modelAndView = new ModelAndView("authorized/support");
