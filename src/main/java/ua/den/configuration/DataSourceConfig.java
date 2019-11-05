@@ -14,7 +14,7 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource getDataSource() {
-        databaseUrl = databaseUrl.replaceAll("\"","");
+        databaseUrl = databaseUrl.replaceAll("\"", "");
 
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url(databaseUrl);
