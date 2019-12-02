@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement(name = "news", namespace = "https://den-edu.herokuapp.com/")
+@XmlRootElement(name = "news", namespace = "https://den-edu.herokuapp.com/news")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class NewsXmlWrapper {
     @XmlElement(name = "article")
