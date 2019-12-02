@@ -3,8 +3,9 @@
 <body>
 <div th:fragment="input">
     <h3 th:text="#{user.text.analysis.field.input.title}"></h3>
-    <form>
-        <textarea th:placeholder="#{user.text.analysis.field.placeholder}" required autofocus style="width:100%;"></textarea>
+    <form class="needs-validation" method="post" th:object="${textDataDto}">
+        <textarea th:placeholder="#{user.text.analysis.field.placeholder}" autofocus style="width:100%;" name="textData" th:value="*{textData}"></textarea>
+        <button type="submit" class="btn btn-primary" th:text="Input" style="margin-top: 1vh;"></button>
     </form>
 </div>
 </body>

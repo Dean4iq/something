@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ua.den.model.dto.UserPasswordDto;
+import ua.den.model.dto.TextInfoDto;
+import ua.den.model.dto.TextInputDto;
 import ua.den.model.dto.UserDataDto;
+import ua.den.model.dto.UserPasswordDto;
 import ua.den.model.entity.User;
 import ua.den.model.service.UserService;
 
@@ -21,8 +26,24 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("text_analysis")
-    public String getTextAnalysisForm() {
-        return "user/textAnalysis";
+    public ModelAndView getTextAnalysisForm() {
+        ModelAndView modelAndView = new ModelAndView("user/textAnalysis");
+
+        modelAndView.addObject("textDataDto", new TextInputDto());
+
+        return modelAndView;
+    }
+
+    @PostMapping("text_analysis")
+    public ModelAndView analyzeText(@ModelAttribute("textDataDto") @Valid final TextInputDto textInputDto,
+                                    final BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("user/textAnalysis");
+
+        if (!bindingResult.hasErrors()) {
+            modelAndView.addObject("textInfoOutputDto", new TextInfoDto());
+        }
+
+        return modelAndView;
     }
 
     @GetMapping("settings")
