@@ -12,7 +12,7 @@
     <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div th:insert="parts/navbar.html :: bar"></div>
+<div th:insert="common_parts/navbar.html :: bar"></div>
 
 <div th:if="${param.updated}" class="alert alert-success" role="alert" th:text="#{admin.user.alert.updated}"></div>
 <div th:if="${param.unacceptable}" class="alert alert-danger" role="alert" th:text="#{admin.user.alert.unacceptable}"></div>

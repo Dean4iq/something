@@ -12,7 +12,7 @@
     <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div th:insert="parts/navbar.html :: bar"></div>
+<div th:insert="common_parts/navbar.html :: bar"></div>
 
 <div th:if="${param.all_deleted}" class="alert alert-success" role="alert"
      th:text="#{admin.users.alert.all_deleted}"></div>

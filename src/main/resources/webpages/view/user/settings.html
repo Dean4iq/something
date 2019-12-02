@@ -9,7 +9,7 @@
     <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body style="background-image: url('/public/img/backgrounds/user_settings.jpg');">
-<div th:insert="parts/navbar.html :: bar"></div>
+<div th:insert="common_parts/navbar.html :: bar"></div>
 <div th:if="${param.updated}" class="alert alert-success" role="alert" th:text="#{user.settings.alert.data_updated}">
     Data is updated
 </div>
