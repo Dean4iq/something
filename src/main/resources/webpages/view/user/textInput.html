@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="input">
+    <h3 th:text="#{user.text.analysis.field.input.title}"></h3>
+    <form>
+        <textarea th:placeholder="#{user.text.analysis.field.placeholder}" required autofocus style="width:100%;"></textarea>
+    </form>
+</div>
+</body>
+</html>

@@ -20,6 +20,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("text_analysis")
+    public String getTextAnalysisForm() {
+        return "user/textAnalysis";
+    }
+
     @GetMapping("settings")
     public ModelAndView getUserSettings(final Principal principal) {
         User user = userService.getUserByLogin(principal.getName());
