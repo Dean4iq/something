@@ -36,7 +36,7 @@ public class TextXmlConverterService {
             textDescriptor.setWord(textData.getWord());
             textDescriptor.setRelations(textData.getUsages());
 
-            marshallObj.marshal(textElements, new FileOutputStream("src/main/resources/texts/texts.xml"));
+            marshallObj.marshal(textElements, new FileOutputStream("src/main/resources/templates/xml/texts/texts.xml"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,10 +47,10 @@ public class TextXmlConverterService {
             JAXBContext jaxbContext = JAXBContext.newInstance(TextDataXml.class);
             Unmarshaller jaxbUnmarshal = jaxbContext.createUnmarshaller();
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            File schemaURL = new File("src/main/resources/texts/texts.xsd");
+            File schemaURL = new File("src/main/resources/templates/xml/texts/texts.xsd");
             Schema schema = sf.newSchema(schemaURL);
             jaxbUnmarshal.setSchema(schema);
-            return (TextDataXml) jaxbUnmarshal.unmarshal(new File("src/main/resources/texts/texts.xml"));
+            return (TextDataXml) jaxbUnmarshal.unmarshal(new File("src/main/resources/templates/xml/texts/texts.xml"));
         } catch (Exception e) {
             System.out.println(e.toString());
         }

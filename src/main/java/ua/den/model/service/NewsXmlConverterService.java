@@ -54,8 +54,8 @@ public class NewsXmlConverterService {
             newsXMLEn.setToBeDisplayed(Date.from(newsData.convertToBeDisplayedDateTime().toInstant()));
             newsXMLEn.setPublished(Date.from(currentDateTime.toInstant()));
 
-            marshallObj.marshal(newsElementsUA, new FileOutputStream("src/main/resources/news/news_uk.xml"));
-            marshallObj.marshal(newsElementsEN, new FileOutputStream("src/main/resources/news/news_en.xml"));
+            marshallObj.marshal(newsElementsUA, new FileOutputStream("src/main/resources/templates/xml/news/news_uk.xml"));
+            marshallObj.marshal(newsElementsEN, new FileOutputStream("src/main/resources/templates/xml/news/news_en.xml"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,10 +70,10 @@ public class NewsXmlConverterService {
             JAXBContext jaxbContext = JAXBContext.newInstance(NewsXmlWrapper.class);
             Unmarshaller jaxbUnmarshal = jaxbContext.createUnmarshaller();
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            File schemaURL = new File("src/main/resources/news/news.xsd");
+            File schemaURL = new File("src/main/resources/templates/xml/news/news.xsd");
             Schema schema = sf.newSchema(schemaURL);
             jaxbUnmarshal.setSchema(schema);
-            return (NewsXmlWrapper) jaxbUnmarshal.unmarshal(new File("src/main/resources/news/news_" + language + ".xml"));
+            return (NewsXmlWrapper) jaxbUnmarshal.unmarshal(new File("src/main/resources/templates/xml/news/news_" + language + ".xml"));
         } catch (Exception e) {
             System.out.println(e.toString());
         }
