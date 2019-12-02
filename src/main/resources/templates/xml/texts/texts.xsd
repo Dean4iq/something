@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="https://den-edu.herokuapp.com/texts">
+    <element name="text">
+        <complexType>
+            <sequence>
+                <element name="words" maxOccurs="unbounded" minOccurs="0">
+                    <complexType>
+                        <sequence>
+                            <element name="word" type="string"/>
+                            <element name="relations">
+                                <complexType>
+                                    <sequence>
+                                        <element name="entry" maxOccurs="unbounded">
+                                            <complexType>
+                                                <sequence>
+                                                    <element name="key" type="string"/>
+                                                    <element name="value" type="integer"/>
+                                                </sequence>
+                                            </complexType>
+                                        </element>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+</schema>
