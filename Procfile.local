@@ -1,1 +1,1 @@
-web: java -Dserver.port=8080 -Xdebug -Xrunjdwp:transport=dt_socket,address=9090,server=y,suspend=n -jar target/something.jar --spring.datasource.url="jdbc:postgresql://localhost:5432/something?user=postgres&password=password"
+web: java -Dserver.port=8080 -Xdebug -Xrunjdwp:transport=dt_socket,address=9090,server=y,suspend=n -jar target/something.jar
