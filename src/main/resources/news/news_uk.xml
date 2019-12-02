@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:news xmlns:ns2="https://den-edu.herokuapp.com/">
+<ns2:news xmlns:ns2="https://den-edu.herokuapp.com/news">
     <article>
         <header>NOT DISPLAYABLE</header>
         <description>Ukrainian text processing is available now!</description>
