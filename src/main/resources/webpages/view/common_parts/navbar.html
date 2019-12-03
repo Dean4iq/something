@@ -25,7 +25,7 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
-                        <a class="dropdown-item" th:href="@{/admin/users}">Users</a>
+                        <a class="dropdown-item" th:href="@{/admin/users}" th:text="#{nav.admin.users}">Users</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
@@ -39,7 +39,7 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownUser">
-                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" th:href="@{/user/text_analysis}" th:text="#{nav.user.text_analysis}">Analyze text</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>

@@ -14,6 +14,7 @@ import ua.den.model.dto.TextInputDto;
 import ua.den.model.dto.UserDataDto;
 import ua.den.model.dto.UserPasswordDto;
 import ua.den.model.entity.User;
+import ua.den.model.service.TextAnalysisService;
 import ua.den.model.service.UserService;
 
 import javax.validation.Valid;
@@ -40,7 +41,11 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("user/textAnalysis");
 
         if (!bindingResult.hasErrors()) {
-            modelAndView.addObject("textInfoOutputDto", new TextInfoDto());
+            TextAnalysisService analysisService = new TextAnalysisService();
+            TextInfoDto textInfoDto = analysisService.analyzeText(textInputDto.getTextData());
+
+            modelAndView.addObject("textInfoOutputDto", textInfoDto);
+            modelAndView.addObject("textDataDto", textInputDto);
         }
 
         return modelAndView;

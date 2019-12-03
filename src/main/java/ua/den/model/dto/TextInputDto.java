@@ -3,7 +3,7 @@ package ua.den.model.dto;
 import javax.validation.constraints.NotBlank;
 
 public class TextInputDto {
-    @NotBlank
+    @NotBlank(message = "field.blank")
     private String textData;
 
     public String getTextData() {
