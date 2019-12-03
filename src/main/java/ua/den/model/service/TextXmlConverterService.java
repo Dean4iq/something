@@ -1,5 +1,7 @@
 package ua.den.model.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.den.model.dto.TextInfoDto;
 import ua.den.model.entity.TextDataXml;
 import ua.den.model.entity.TextDescriptorXml;
@@ -16,6 +18,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TextXmlConverterService {
+    public static final Logger LOG = LoggerFactory.getLogger(TextXmlConverterService.class);
+
     public List<TextInfoDto> getTextsFromXmlAndConvertToDto() {
         List<TextDescriptorXml> newsXMLs = receiveTextXmlWrapper().getTextDescriptors();
 
@@ -38,7 +42,7 @@ public class TextXmlConverterService {
 
             marshallObj.marshal(textElements, new FileOutputStream("src/main/resources/templates/xml/texts/texts.xml"));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception", e);
         }
     }
 
@@ -52,7 +56,7 @@ public class TextXmlConverterService {
             jaxbUnmarshal.setSchema(schema);
             return (TextDataXml) jaxbUnmarshal.unmarshal(new File("src/main/resources/templates/xml/texts/texts.xml"));
         } catch (Exception e) {
-            System.out.println(e.toString());
+            LOG.error("Error", e);
         }
 
         return new TextDataXml();

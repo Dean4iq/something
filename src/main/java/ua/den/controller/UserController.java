@@ -23,6 +23,8 @@ import java.security.Principal;
 @Controller
 @RequestMapping("user")
 public class UserController {
+    public static final String USER_SETTINGS = "user/settings";
+
     @Autowired
     private UserService userService;
 
@@ -55,7 +57,7 @@ public class UserController {
     public ModelAndView getUserSettings(final Principal principal) {
         User user = userService.getUserByLogin(principal.getName());
 
-        ModelAndView modelAndView = new ModelAndView("user/settings");
+        ModelAndView modelAndView = new ModelAndView(USER_SETTINGS);
 
         modelAndView.addObject("userData", initializeUserDataDto(user));
         modelAndView.addObject("userPassword", initializeUserPasswordDto());
@@ -70,7 +72,7 @@ public class UserController {
                                        final BindingResult result) {
         if (result.hasErrors()) {
             userData.setBirthDate(userService.getUserByLogin(principal.getName()).getBirthDate().toLocalDateTime().toLocalDate());
-            return new ModelAndView("user/settings");
+            return new ModelAndView(USER_SETTINGS);
         } else {
             User userInDB = userService.getUserByLogin(principal.getName());
 
@@ -88,7 +90,7 @@ public class UserController {
                                            @ModelAttribute("userPassword") @Valid final UserPasswordDto user,
                                            final BindingResult result) {
         if (result.hasErrors()) {
-            ModelAndView modelAndView = new ModelAndView("user/settings");
+            ModelAndView modelAndView = new ModelAndView(USER_SETTINGS);
 
             modelAndView.addObject("userData", initializeUserDataDto(userService.getUserByLogin(principal.getName())));
 

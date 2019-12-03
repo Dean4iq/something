@@ -13,14 +13,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
-    private final String LOGIN_URI = "/login";
+    private static final String LOGIN_URI = "/login";
 
     private Set<String> acceptableURI;
 
     public CustomAccessDeniedHandler() {
         acceptableURI = new HashSet<>();
 
-        acceptableURI.add("/login");
+        acceptableURI.add(LOGIN_URI);
         acceptableURI.add("/sign_up");
     }
 

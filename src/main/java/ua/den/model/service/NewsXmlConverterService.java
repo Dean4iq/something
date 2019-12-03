@@ -1,5 +1,7 @@
 package ua.den.model.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ua.den.model.dto.NewsDto;
 import ua.den.model.dto.NewsInputDataDto;
@@ -14,13 +16,16 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.sql.Date;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Date.from;
+
 @Service
 public class NewsXmlConverterService {
+    private static final Logger LOG = LoggerFactory.getLogger(NewsXmlConverterService.class);
+
     public List<NewsDto> getNewsFromXmlAndConvertToDto(String language, OffsetDateTime date) {
         List<NewsXML> newsXMLs = receiveNewsXmlWrapper(language).getNewsXML();
 
@@ -42,8 +47,8 @@ public class NewsXmlConverterService {
             newsXMLUa.setHeader(newsData.getHeaderUa());
             newsXMLUa.setDescription(newsData.getDescriptionUa());
             newsXMLUa.setText(newsData.getTextUa());
-            newsXMLUa.setToBeDisplayed(Date.from(newsData.convertToBeDisplayedDateTime().toInstant()));
-            newsXMLUa.setPublished(Date.from(currentDateTime.toInstant()));
+            newsXMLUa.setToBeDisplayed(from(newsData.convertToBeDisplayedDateTime().toInstant()));
+            newsXMLUa.setPublished(from(currentDateTime.toInstant()));
 
             NewsXML newsXMLEn = new NewsXML();
             newsElementsEN.getNewsXML().add(newsXMLEn);
@@ -51,13 +56,13 @@ public class NewsXmlConverterService {
             newsXMLEn.setHeader(newsData.getHeaderEn());
             newsXMLEn.setDescription(newsData.getDescriptionEn());
             newsXMLEn.setText(newsData.getTextEn());
-            newsXMLEn.setToBeDisplayed(Date.from(newsData.convertToBeDisplayedDateTime().toInstant()));
-            newsXMLEn.setPublished(Date.from(currentDateTime.toInstant()));
+            newsXMLEn.setToBeDisplayed(from(newsData.convertToBeDisplayedDateTime().toInstant()));
+            newsXMLEn.setPublished(from(currentDateTime.toInstant()));
 
             marshallObj.marshal(newsElementsUA, new FileOutputStream("src/main/resources/templates/xml/news/news_uk.xml"));
             marshallObj.marshal(newsElementsEN, new FileOutputStream("src/main/resources/templates/xml/news/news_en.xml"));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error caused by {}", e);
         }
     }
 
@@ -75,7 +80,7 @@ public class NewsXmlConverterService {
             jaxbUnmarshal.setSchema(schema);
             return (NewsXmlWrapper) jaxbUnmarshal.unmarshal(new File("src/main/resources/templates/xml/news/news_" + language + ".xml"));
         } catch (Exception e) {
-            System.out.println(e.toString());
+            LOG.error(e.toString());
         }
 
         return new NewsXmlWrapper();

@@ -1,46 +1,20 @@
 package ua.den.model.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
+@Getter
+@Setter
 public class NewsDto implements Serializable, Comparable<NewsDto> {
     private String header;
     private String description;
     private String text;
     private boolean displayable;
     private OffsetDateTime published;
-
-    public String getHeader() {
-        return header;
-    }
-
-    public void setHeader(String header) {
-        this.header = header;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public boolean isDisplayable() {
-        return displayable;
-    }
-
-    public void setDisplayable(boolean displayable) {
-        this.displayable = displayable;
-    }
 
     public OffsetDateTime getPublished() {
         return published;
@@ -59,6 +33,23 @@ public class NewsDto implements Serializable, Comparable<NewsDto> {
                 ", displayable=" + displayable +
                 ", published=" + published +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NewsDto)) return false;
+        NewsDto newsDto = (NewsDto) o;
+        return displayable == newsDto.displayable &&
+                header.equals(newsDto.header) &&
+                description.equals(newsDto.description) &&
+                text.equals(newsDto.text) &&
+                published.equals(newsDto.published);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(header, description, text, displayable, published);
     }
 
     @Override

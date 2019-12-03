@@ -14,7 +14,8 @@ import java.util.List;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
-    private final Integer ELEMENTS_ON_PAGE = 10;
+    public static final String REDIRECT_ADMIN_USERS = "redirect:/admin/users/";
+    private static final Integer ELEMENTS_ON_PAGE = 10;
 
     @Autowired
     private UserService userService;
@@ -42,28 +43,28 @@ public class AdminController {
     @PostMapping("users/{login}/disable")
     public ModelAndView disableUserAccount(@PathVariable("login") final User user) {
         if (user.getAuthority().getRole().equals(AuthorityType.ROLE_USER)) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?updated=true");
+            ModelAndView modelAndView = new ModelAndView(REDIRECT_ADMIN_USERS + user.getLogin() + "?updated=true");
 
             user.setEnabled(false);
             userService.updateUserData(user);
 
             return modelAndView;
         } else {
-            return new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?unacceptable=true");
+            return new ModelAndView(REDIRECT_ADMIN_USERS + user.getLogin() + "?unacceptable=true");
         }
     }
 
     @PostMapping("users/{login}/enable")
     public ModelAndView enableUserAccount(@PathVariable("login") final User user) {
         if (user.getAuthority().getRole().equals(AuthorityType.ROLE_USER)) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?updated=true");
+            ModelAndView modelAndView = new ModelAndView(REDIRECT_ADMIN_USERS + user.getLogin() + "?updated=true");
 
             user.setEnabled(true);
             userService.updateUserData(user);
 
             return modelAndView;
         } else {
-            return new ModelAndView("redirect:/admin/users/" + user.getLogin() + "?unacceptable=true");
+            return new ModelAndView(REDIRECT_ADMIN_USERS + user.getLogin() + "?unacceptable=true");
         }
     }
 

@@ -27,7 +27,7 @@ public class AuthorizedController {
     @Autowired
     private NewsXmlConverterService newsXmlConverterService;
 
-    @RequestMapping("login_success")
+    @GetMapping(path = "login_success")
     public String redirectToHome() {
         return "redirect:/home";
     }
@@ -76,7 +76,7 @@ public class AuthorizedController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "support-output", produces = "application/json", method = RequestMethod.POST)
+    @PostMapping(value = "support-output", produces = "application/json")
     @ResponseBody
     public Map<String, Object> manageSupportMessage(String name, String email, String subject, String text) {
         UserApplySupportDto userApplySupportDto = new UserApplySupportDto();
@@ -105,7 +105,7 @@ public class AuthorizedController {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<UserApplySupportDto>> violations = validator.validate(object);
 
-        if (violations.size() != 0) {
+        if (!violations.isEmpty()) {
             messages.put("status", "input_errors");
 
             String[] fieldsWithErrors = new String[violations.size()];

@@ -12,11 +12,9 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("")
 public class GuestController {
     @Autowired
     private UserService userService;
-
 
     @RequestMapping("")
     public String handleEmptyPath() {

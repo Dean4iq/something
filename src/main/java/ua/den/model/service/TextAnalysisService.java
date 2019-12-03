@@ -1,6 +1,5 @@
 package ua.den.model.service;
 
-import org.springframework.util.comparator.Comparators;
 import ua.den.model.dto.TextInfoDto;
 import ua.den.model.entity.TextDataXml;
 import ua.den.model.entity.TextDescriptorXml;

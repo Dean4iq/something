@@ -1,5 +1,7 @@
 package ua.den.model.validation.validators;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.den.model.validation.FieldsMatches;
 
 import javax.validation.ConstraintValidator;
@@ -7,6 +9,8 @@ import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.Field;
 
 public class PasswordMatchesValidator implements ConstraintValidator<FieldsMatches, Object> {
+    public static final Logger LOG = LoggerFactory.getLogger(PasswordMatchesValidator.class);
+
     private String passwordFieldName;
     private String repeatedPasswordFieldName;
     private Class invokedClass;
@@ -26,7 +30,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<FieldsMatch
 
             return password.equals(repeatedPassword);
         } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
+            LOG.error("Exception", e);
         }
 
         return false;

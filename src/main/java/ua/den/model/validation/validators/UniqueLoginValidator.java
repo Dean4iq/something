@@ -12,10 +12,6 @@ public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, St
     private UserService userService;
 
     @Override
-    public void initialize(UniqueLogin constraintAnnotation) {
-    }
-
-    @Override
     public boolean isValid(String login, ConstraintValidatorContext constraintValidatorContext) {
         return (userService.getUserByLogin(login) == null);
     }

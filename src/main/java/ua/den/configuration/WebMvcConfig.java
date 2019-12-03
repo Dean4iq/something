@@ -21,6 +21,9 @@ import java.util.Locale;
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    public static final String CHARACTER_ENCODING = "UTF-8";
+
     @Bean
     public ClassLoaderTemplateResolver yourTemplateResolver() {
         ClassLoaderTemplateResolver configurer = new ClassLoaderTemplateResolver();
@@ -28,7 +31,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         configurer.setPrefix("webpages/view/");
         configurer.setSuffix(".html");
         configurer.setTemplateMode(TemplateMode.HTML);
-        configurer.setCharacterEncoding("UTF-8");
+        configurer.setCharacterEncoding(CHARACTER_ENCODING);
         configurer.setOrder(0);
         configurer.setCheckExistence(true);
 
@@ -40,7 +43,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasenames("messages");
-        source.setDefaultEncoding("UTF-8");
+        source.setDefaultEncoding(CHARACTER_ENCODING);
         source.setUseCodeAsDefaultMessage(true);
 
         return source;
@@ -52,11 +55,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 = new ReloadableResourceBundleMessageSource();
 
         messageSource.setBasename("classpath:validation_messages");
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setDefaultEncoding(CHARACTER_ENCODING);
         return messageSource;
     }
 
     @Bean
+    @Override
     public LocalValidatorFactoryBean getValidator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(validatorMessageSource());
