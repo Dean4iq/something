@@ -27,7 +27,7 @@ public class AuthorizedController {
     @Autowired
     private NewsXmlConverterService newsXmlConverterService;
 
-    @GetMapping(path = "login_success")
+    @RequestMapping(path = "login_success", method = {RequestMethod.GET, RequestMethod.POST})
     public String redirectToHome() {
         return "redirect:/home";
     }
