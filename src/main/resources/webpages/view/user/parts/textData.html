@@ -4,9 +4,11 @@
 <div th:fragment="output" th:if="${textInfoOutputDto != null}">
     <h3 th:text="#{user.text.analysis.field.output.title}"></h3>
 
-    <ul th:each="usage : ${textInfoOutputDto.usages}">
-        <li th:text="${usage.key + ' - ' + usage.value}"></li>
-    </ul>
+    <nav style="height: 30vh; width: 95%; overflow: hidden; overflow-y: scroll; border: 1px solid gray; margin: auto;">
+        <ul th:each="usage : ${textInfoOutputDto.usages}">
+            <li th:text="${usage.key + ' - ' + usage.value}"></li>
+        </ul>
+    </nav>
 
     <table></table>
 </div>
