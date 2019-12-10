@@ -8,7 +8,7 @@
         </filter>
 
         <encoder>
-            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %highlight(%-5level %logger) %green(%msg) %n</pattern>
+            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %boldBlue(%-5level %logger) %boldGreen(%msg) %n</pattern>
         </encoder>
     </appender>
 
@@ -20,7 +20,7 @@
         </filter>
 
         <encoder>
-            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %boldYellow(%-5level %logger) %boldYellow(%msg) %n</pattern>
+            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %boldBlue(%-5level %logger) %boldYellow(%msg) %n</pattern>
         </encoder>
     </appender>
 
@@ -32,7 +32,7 @@
         </filter>
 
         <encoder>
-            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %boldRed(%-5level %logger %msg%n)</pattern>
+            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %red(%-5level %logger) %boldRed(%msg) %n</pattern>
         </encoder>
     </appender>
 
