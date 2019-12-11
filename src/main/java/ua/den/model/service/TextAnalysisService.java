@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class TextAnalysisService {
+    public static final String REGEX_WITHIN_SENTENCE = "(\\s|,|\"|\\s'|'\\s|:|\\s(-)+\\s|(-)+\\s|-{2,}|_|!|\\?|\\n|\\t|\\r)+";
     private String textToAnalyze;
     private Set<String> keyWords;
 
@@ -56,7 +57,7 @@ public class TextAnalysisService {
     }
 
     private void countWordsAmount(Map<String, Integer> wordsAmountMap, String sentence) {
-        String[] words = sentence.split("(\\s|,|\"|\\s'|'\\s|:|\\s(-)+\\s|(-)+\\s|-{2,}|_|!|\\?|\\n|\\t|\\r)+");
+        String[] words = sentence.split(REGEX_WITHIN_SENTENCE);
 
         for (String word : words) {
             if (word != null && !word.isEmpty()) {
