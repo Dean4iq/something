@@ -1,6 +1,8 @@
 package ua.den.controller;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +11,9 @@ import ua.den.model.entity.User;
 import ua.den.model.enums.AuthorityType;
 import ua.den.model.service.UserService;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("admin")
@@ -17,6 +21,10 @@ public class AdminController {
     public static final String REDIRECT_ADMIN_USERS = "redirect:/admin/users/";
     private static final Integer ELEMENTS_ON_PAGE = 10;
 
+    @Autowired
+    private ApplicationContext context;
+    @Autowired
+    private BeanFactory factory;
     @Autowired
     private UserService userService;
 
@@ -79,6 +87,76 @@ public class AdminController {
         return modelAndView;
     }
 
+    @GetMapping("controlBeans")
+    public ModelAndView getControlBeansPage() {
+        ModelAndView modelAndView = new ModelAndView("admin/controlBeans");
+
+        List<String> listOfBeans = getBeanNamesSet().stream()
+                .map(elem -> {
+                    int pointIndex = elem.indexOf('.');
+                    if (pointIndex != -1) {
+                        return elem.substring(0, elem.indexOf('.'));
+                    } else {
+                        return elem;
+                    }
+                })
+                .collect(Collectors.toSet()).stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        modelAndView.addObject("beansList", listOfBeans);
+
+        return modelAndView;
+    }
+
+    @GetMapping("controlBeans/**")
+    public ModelAndView getBeanInfo(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("admin/beanPage");
+        String beanBaseName = request.getRequestURI().split("controlBeans/")[1];
+
+        modelAndView.addObject("basePath", beanBaseName);
+
+        beanBaseName = beanBaseName.replace('/', '.');
+
+        if (factory.containsBean(beanBaseName)) {
+            modelAndView.addObject("beanInfo", factory.getBean(beanBaseName));
+        } else {
+            Set<String> beanFullPathNames = getBeanNamesSet();
+            String[] beansNames = beanFullPathNames.toArray(new String[0]);
+            String[] pathSplitString = beanBaseName.split("\\.");
+
+            modelAndView.addObject("beansListNames", beansNames);
+
+            List<String> listOfBeans = Arrays
+                    .stream(beansNames)
+                    .filter(elem -> {
+                        String[] path = Arrays.copyOfRange(elem.split("\\."), 0, pathSplitString.length);
+                        return Arrays.equals(pathSplitString, path);
+                    })
+                    .map(elem -> {
+                        int pointIndex = elem.indexOf('.');
+                        if (pointIndex == -1) {
+                            return elem;
+                        } else {
+                            String result = elem.substring(ordinalIndexOf(elem, ".", pathSplitString.length) + 1);
+                            if (result.indexOf('.') != -1) {
+                                result = result.substring(0, result.indexOf('.'));
+                            }
+
+                            return result;
+                        }
+                    })
+                    .collect(Collectors.toSet()).stream()
+                    .sorted()
+                    .collect(Collectors.toList());
+
+            modelAndView.addObject("beansList", listOfBeans);
+        }
+
+        return modelAndView;
+    }
+
+
     @PostMapping("users/updateStatus")
     public String updateAllUsersStatus(@RequestParam("account_status") boolean status) {
         userService.updateUsersAccountStatus(status);
@@ -103,5 +181,22 @@ public class AdminController {
         userService.deleteUser(user);
 
         return modelAndView;
+    }
+
+    private Set<String> getBeanNamesSet() {
+        String[] beansNames = context.getBeanDefinitionNames();
+
+        return Arrays.stream(beansNames)
+                .collect(Collectors.toSet());
+    }
+
+    private int ordinalIndexOf(String str, String substr, int n) {
+        int pos = str.indexOf(substr);
+
+        while (--n > 0 && pos != -1) {
+            pos = str.indexOf(substr, pos + 1);
+        }
+
+        return pos;
     }
 }

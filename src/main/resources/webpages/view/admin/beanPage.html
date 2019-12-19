@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${beanInfo != null}">
+    <h1 th:text="${beanInfo.class.canonicalName}"></h1>
+</div>
+
+<div th:if="${beansList != null}">
+    <h3 th:text="${basePath}"></h3>
+    <ul>
+        <li th:each="bean : ${beansList}">
+            <a th:href="@{'/admin/controlBeans/' + ${basePath} +'/'+ ${bean}}" th:text="${bean}"></a>
+        </li>
+    </ul>
+
+    <ul title="BEAN NAMEs">
+        <li th:each="beanName : ${beansListNames}" th:text="${beanName}">
+
+        </li>
+    </ul>
+</div>
+</body>
+</html>
