@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <title th:text="#{user.text.analysis.title}"></title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
-    <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div th:insert="common_parts/navbar.html :: bar"></div>
+
 <div style="margin: 10px 10% 5% 10%;">
     <div th:insert="user/parts/textInput.html :: input"></div>
 

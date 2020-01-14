@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("text_analysis")
+    @GetMapping({"text_analysis_ua", "text_analysis_en"})
     public ModelAndView getTextAnalysisForm() {
         ModelAndView modelAndView = new ModelAndView("user/textAnalysis");
 
@@ -37,9 +37,25 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("text_analysis")
-    public ModelAndView analyzeText(@ModelAttribute("textDataDto") @Valid final TextInputDto textInputDto,
-                                    final BindingResult bindingResult) {
+    @PostMapping("text_analysis_ua")
+    public ModelAndView analyzeUaText(@ModelAttribute("textDataDto") @Valid final TextInputDto textInputDto,
+                                      final BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("user/textAnalysis");
+
+        if (!bindingResult.hasErrors()) {
+            TextAnalysisService analysisService = new TextAnalysisService();
+            TextInfoDto textInfoDto = analysisService.analyzeText(textInputDto.getTextData());
+
+            modelAndView.addObject("textInfoOutputDto", textInfoDto);
+            modelAndView.addObject("textDataDto", textInputDto);
+        }
+
+        return modelAndView;
+    }
+
+    @PostMapping("text_analysis_en")
+    public ModelAndView analyzeEnText(@ModelAttribute("textDataDto") @Valid final TextInputDto textInputDto,
+                                      final BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("user/textAnalysis");
 
         if (!bindingResult.hasErrors()) {
