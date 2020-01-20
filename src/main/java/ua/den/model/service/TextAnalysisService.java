@@ -48,7 +48,18 @@ public class TextAnalysisService {
                         (e1, e2) -> e1, LinkedHashMap::new));
 
         textInfoDto.setUsages(wordsAmount);
+
+        textInfoDto.setMarkedOutput(markStrings());
+
         return textInfoDto;
+    }
+
+    private String markStrings() {
+        return new StringBuilder(textToAnalyze.substring(0, textToAnalyze.length() / 2))
+                .append("<mark>")
+                .append(textToAnalyze.substring(textToAnalyze.length()/2))
+                .append("</mark>")
+                .toString();
     }
 
     private TextDescriptorXml analyzeWordBindings(String sentence) {

@@ -7,9 +7,17 @@
     <form class="needs-validation" method="post" th:object="${textDataDto}">
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('textData')}"
              th:errors="*{textData}"></div>
-        <textarea th:placeholder="#{user.text.analysis.field.placeholder}" autofocus style="width:100%; height: 50vh; resize: none;"
-                  name="textData" th:utext="*{textData}"></textarea>
-        <button type="submit" class="btn btn-primary" th:text="#{user.text.analysis.submit}"
+
+        <div class="container" style="padding: 0;">
+            <div class="backdrop" id="backdropItem">
+                <div class="highlights" id="markedOutput"></div>
+            </div>
+
+            <textarea th:placeholder="#{user.text.analysis.field.placeholder}" autofocus id="textInputItem" onresize="this.resizeWidth();"
+                      name="textData" th:utext="*{textData}"></textarea>
+        </div>
+
+        <button type="button" class="btn btn-primary" th:text="#{user.text.analysis.submit}" id="callAjaxButton"
                 style="margin-top: 1vh;"></button>
     </form>
 </div>

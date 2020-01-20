@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.den.model.dto.TextInfoDto;
 import ua.den.model.dto.TextInputDto;
@@ -19,6 +16,8 @@ import ua.den.model.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("user")
@@ -37,20 +36,22 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("text_analysis_ua")
-    public ModelAndView analyzeUaText(@ModelAttribute("textDataDto") @Valid final TextInputDto textInputDto,
-                                      final BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView("user/textAnalysis");
-
+    @PostMapping(value = "text_analysis_ua", consumes="application/json")
+    @ResponseBody
+    public Map<String, Object> analyzeUaText(@RequestBody @Valid final TextInputDto textInputDto,
+                                             final BindingResult bindingResult) {
+        Map<String, Object> result = new HashMap<>();
         if (!bindingResult.hasErrors()) {
             TextAnalysisService analysisService = new TextAnalysisService();
             TextInfoDto textInfoDto = analysisService.analyzeText(textInputDto.getTextData());
 
-            modelAndView.addObject("textInfoOutputDto", textInfoDto);
-            modelAndView.addObject("textDataDto", textInputDto);
+            result.put("markedOutput", textInfoDto.getMarkedOutput());
+            result.put("usagesOutput",textInfoDto.getUsages());
+        } else {
+            result.put("error", bindingResult.getSuppressedFields());
         }
 
-        return modelAndView;
+        return result;
     }
 
     @PostMapping("text_analysis_en")

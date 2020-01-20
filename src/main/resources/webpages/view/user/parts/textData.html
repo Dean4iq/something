@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="output" th:if="${textInfoOutputDto != null}">
+<div th:fragment="output">
     <h3 th:text="#{user.text.analysis.field.output.title}"></h3>
 
     <nav style="height: 30vh; width: 95%; overflow: hidden; overflow-y: scroll; border: 1px solid gray; margin: auto;">
-        <ul th:each="usage : ${textInfoOutputDto.usages}">
-            <li th:text="${usage.key + ' - ' + usage.value}"></li>
+        <ul id="usagesOutput">
         </ul>
     </nav>
 

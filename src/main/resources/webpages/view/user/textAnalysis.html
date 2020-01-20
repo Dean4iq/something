@@ -4,9 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{user.text.analysis.title}"></title>
+
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/public/css/textInputHighlight.css}"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/js/ajaxCallScript.js}"></script>
 </head>
 <body>
 <div th:insert="common_parts/navbar.html :: bar"></div>
