@@ -1,67 +1,17 @@
-.highlights, textarea {
-  padding: 10px;
-  font: 20px/28px 'Open Sans', sans-serif;
-  letter-spacing: 1px;
-}
-
-.container {
-  display: block;
-  margin: 0 auto;
-  transform: translateZ(0);
-  -webkit-text-size-adjust: none;
-}
-
-.backdrop, textarea {
+div#textInputItem {
     height: 50vh;
     width: 100%;
-    border: 2px solid #685972;
-}
-
-.backdrop {
-  z-index: -1;
-  overflow: auto;
-  position: absolute;
-  pointer-events: none;
-  transition: transform 1s;
-}
-
-.highlights {
-    white-space: pre-wrap;
+    border: 1px solid #000;
+    resize: none;
+    overflow-y: scroll;
+    white-space: normal;
     word-wrap: break-word;
-    color: transparent;
 }
 
-textarea {
-  z-index: 5;
-  background: none;
-  position: relative;
-  resize: none;
-}
-
-mark {
+div#textInputItem mark {
   border-radius: 3px;
-  color: transparent;
+  font: 20px/28px 'Open Sans', sans-serif;
+  letter-spacing: 1px;
   background-color: #b1d5e5;
   padding: 0;
-}
-
-.perspective .backdrop {
-  transform:
-    perspective(1500px)
-    translateX(-125px)
-    rotateY(45deg)
-    scale(.9);
-}
-
-.perspective textarea {
-  transform:
-    perspective(1500px)
-    translateX(155px)
-    rotateY(45deg)
-    scale(1.1);
-}
-
-textarea:focus, button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #c6aada;
 }

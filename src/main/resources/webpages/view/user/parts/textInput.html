@@ -8,14 +8,7 @@
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('textData')}"
              th:errors="*{textData}"></div>
 
-        <div class="container" style="padding: 0;">
-            <div class="backdrop" id="backdropItem">
-                <div class="highlights" id="markedOutput"></div>
-            </div>
-
-            <textarea th:placeholder="#{user.text.analysis.field.placeholder}" autofocus id="textInputItem" onresize="this.resizeWidth();"
-                      name="textData" th:utext="*{textData}"></textarea>
-        </div>
+        <div id="textInputItem" contenteditable="true"></div>
 
         <button type="button" class="btn btn-primary" th:text="#{user.text.analysis.submit}" id="callAjaxButton"
                 style="margin-top: 1vh;"></button>

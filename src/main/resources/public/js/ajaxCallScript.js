@@ -1,9 +1,10 @@
 $(document).ready(function() {
     $("#callAjaxButton").click(function(e) {
         e.preventDefault();
+        $("#callAjaxButton").attr("disabled", true);
 
         var textInputDto = {
-           textData: $('#textInputItem').val()
+           textData: $('#textInputItem').html()
         }
 
         $.ajax({
@@ -13,10 +14,12 @@ $(document).ready(function() {
             dataType: "json",
             data: JSON.stringify(textInputDto),
             success: function(result) {
-                processOutput(result)
+                processOutput(result);
+                $("#callAjaxButton").attr("disabled", false);
             },
             error: function() {
-                alert("Error")
+                $("#callAjaxButton").attr("disabled", false);
+                alert("Error");
             }
         });
     });
@@ -36,7 +39,7 @@ $(document).ready(function() {
             }
 
             if (output.markedOutput != null) {
-                $('#markedOutput').html(output.markedOutput);
+                $('#textInputItem').html(output.markedOutput);
             }
         }
     }
