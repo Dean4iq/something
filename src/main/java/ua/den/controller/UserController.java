@@ -14,6 +14,7 @@ import ua.den.model.entity.User;
 import ua.den.model.service.TextAnalysisService;
 import ua.den.model.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
@@ -36,19 +37,29 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping(value = "text_analysis_ua", consumes="application/json")
+    @PostMapping(value = "text_analysis_ua", consumes = "application/json")
     @ResponseBody
     public Map<String, Object> analyzeUaText(@RequestBody @Valid final TextInputDto textInputDto,
-                                             final BindingResult bindingResult) {
+                                             final BindingResult bindingResult,
+                                             final HttpSession session) {
         Map<String, Object> result = new HashMap<>();
-        if (!bindingResult.hasErrors()) {
-            TextAnalysisService analysisService = new TextAnalysisService();
-            TextInfoDto textInfoDto = analysisService.analyzeText(textInputDto.getTextData());
+        Object sessionAnalysisInProgressChecker = session.getAttribute("text_analysis_in_progress");
 
-            result.put("markedOutput", textInfoDto.getMarkedOutput());
-            result.put("usagesOutput",textInfoDto.getUsages());
-        } else {
-            result.put("error", bindingResult.getSuppressedFields());
+        if (sessionAnalysisInProgressChecker == null || (sessionAnalysisInProgressChecker instanceof Boolean
+                && Boolean.FALSE.equals(sessionAnalysisInProgressChecker))) {
+            session.setAttribute("text_analysis_in_progress", Boolean.TRUE);
+
+            if (!bindingResult.hasErrors()) {
+                TextAnalysisService analysisService = new TextAnalysisService();
+                TextInfoDto textInfoDto = analysisService.analyzeText(textInputDto.getTextData());
+
+                result.put("markedOutput", textInfoDto.getMarkedOutput());
+                result.put("usagesOutput", textInfoDto.getUsages());
+            } else {
+                result.put("error", bindingResult.getSuppressedFields());
+            }
+
+            session.setAttribute("text_analysis_in_progress", Boolean.FALSE);
         }
 
         return result;
